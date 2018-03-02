@@ -1,0 +1,12 @@
+*
+
+!*/
+!.gitmodules
+!.gitignore
+!README.md
+!*.py
+!*.ipynb
+!*.sh
+!*.txt
+!*.tex
+!*.bib
