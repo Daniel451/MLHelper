@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="MLHelper",
-      version="0.11.4",
+      version="0.11.5",
       description="Collection of useful helper methods, mostly for manipulating arrays.",
       url="https://github.com/Daniel451/MLHelper",
       author="Daniel Speck",
