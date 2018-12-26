@@ -3,8 +3,7 @@ import sys
 from enum import Enum
 
 
-sys.path.append(os.environ["ROBO_AI_CODE"])
-from robocup_image_reader.ImageReader import Reader as ImgRdr
+from .ImageReader import Reader as ImgRdr
 
 
 class TestDataSets(Enum):

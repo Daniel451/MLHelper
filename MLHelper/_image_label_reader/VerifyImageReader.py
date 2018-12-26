@@ -1,9 +1,8 @@
-import os, sys
+import os
 from matplotlib import pyplot as plt
 from itertools import product
 
-sys.path.append(os.environ["ROBO_AI_CODE"])
-from robocup_image_reader.ImageReader import Reader
+from .ImageReader import Reader
 
 
 

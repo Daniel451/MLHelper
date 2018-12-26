@@ -8,9 +8,8 @@ import time
 from tqdm import tqdm
 
 
-sys.path.append(os.environ["ROBO_AI_CODE"])
-from robocup_image_reader.PathImageFinder import ImgFind
-from robocup_image_reader.PathImageFinderFilterLabels import ImgFindFilter
+from .PathImageFinder import ImgFind
+from .PathImageFinderFilterLabels import ImgFindFilter
 
 
 class TestReader:

@@ -1,12 +1,9 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-import numpy as np
-import time
-import sys, os
+import os
 from itertools import product
 
-sys.path.append(os.environ["ROBO_AI_CODE"])
-from robocup_image_reader.ImageLabelReader import DataObject
+from .ImageLabelReader import DataObject
 
 batch_size = 12
 imageset = ["bitbots-set00-01", "bitbots-set00-02", "bitbots-set00-03", "bitbots-set00-04", "bitbots-set00-05",

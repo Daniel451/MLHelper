@@ -1,19 +1,13 @@
-import cv2
-from itertools import cycle
 from typing import List
-from collections import OrderedDict
-import multiprocessing as mp
 
-import numpy as np
-import os, sys
+import os
 import time
 
-
-sys.path.append(os.environ["ROBO_AI_CODE"])
+# todo: bugged
 from datasets import BallDatasetHandler
-from robocup_image_reader.ReaderTestImages import TestReader
-from robocup_image_reader.LabelReader import Reader as LblReader
-from robocup_image_reader.ImageBatch import ImageBatch
+from .ReaderTestImages import TestReader
+from .LabelReader import Reader as LblReader
+from .ImageBatch import ImageBatch
 
 
 class DataObjectTestSet:

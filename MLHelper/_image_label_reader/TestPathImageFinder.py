@@ -1,8 +1,7 @@
 import unittest
-import sys, os
+import os
 
-sys.path.append(os.environ["ROBO_AI_CODE"])
-from robocup_image_reader.PathImageFinder import ImgFind
+from .PathImageFinder import ImgFind
 
 
 
