@@ -11,6 +11,7 @@ class DataObject:
                  batch_size : int = 1,
                  queue_size : int = 64,
                  img_dim : tuple = None,
+                 processes : int = None,
                  filter_labels = False):
         """
         constructor
@@ -24,7 +25,7 @@ class DataObject:
         self._batch_size = batch_size
         self._labels = LblReader(self._pathlist, img_dim=img_dim)
         self._images = ImgReader(self._pathlist, batch_size=self._batch_size, queue_size=queue_size, img_dim=img_dim,
-                                 filter_labels=filter_labels)
+                                 filter_labels=filter_labels, processes=processes)
 
 
     def get_set_img(self):

@@ -13,10 +13,10 @@ from .PathImageFinderFilterLabels import ImgFindFilter
 
 class Reader:
 
-
     def __init__(self, pathlist : List[str],
                  batch_size : int = 1,
                  queue_size : int = 16,
+                 processes : int = None,
                  img_dim : tuple = None,
                  wait_for_queue_full = True,
                  filter_labels = False):
@@ -25,6 +25,7 @@ class Reader:
         :param batch_size: size of the image data batches that will be loaded
         :param img_dim: resize images to given dimensions - None by default
         :param wait_for_queue_full: toggles if main thread should wait for the queue to be full before continuing
+        :param processes: number of processes to start as workers for loading images
         """
         # init variables
         self._pathlist = pathlist
@@ -53,8 +54,17 @@ class Reader:
         worker.daemon = True
         worker.start()
 
+        # determine appropriate number of processes
+        if processes is None:
+            try:
+                num_workers = int(mp.cpu_count() / 2)
+            except Exception:
+                num_workers = 4
+        else:
+            num_workers = processes
+
         # start multiprocessing worker for filling queue
-        for i in range(2):
+        for i in range(num_workers):
             worker = mp.Process(target=self._worker)
             worker.daemon = True
             worker.start()
