@@ -4,3 +4,4 @@
 !MLHelper/_image_label_reader
 !.gitignore
 !*.py
+!rebuild.sh
