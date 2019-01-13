@@ -3,8 +3,7 @@ from typing import List
 import os
 import time
 
-# todo: bugged
-from datasets import BallDatasetHandler
+from ..datasets.bitbots import BallDatasetHandler
 from .ReaderTestImages import TestReader
 from .LabelReader import Reader as LblReader
 from .ImageBatch import ImageBatch
@@ -83,7 +82,7 @@ class DataObjectTestSet:
 
 
 if __name__ == "__main__":
-    set_paths = [os.path.join(os.environ["ROBO_AI_DATA"], iset) for iset in BallDatasetHandler.TEST_CHALLENGE_2018]
+    set_paths = BallDatasetHandler.TEST.CHALLENGE_2018
     starting = time.time()
     data = DataObjectTestSet(set_paths, batch_size=16, queue_size=16, img_dim=(200, 150))
     print(time.time()-starting)

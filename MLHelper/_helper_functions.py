@@ -1,14 +1,14 @@
 import numpy as np
 
 
-def PAI(arr : np.ndarray, name : str = "") -> None:
+def PAI(arr: np.ndarray, name: str = "") -> None:
     """
     prints array information
     """
     print(GAI(arr, name))
 
 
-def GAI(arr : np.ndarray, name : str = "") -> str:
+def GAI(arr: np.ndarray, name: str = "") -> str:
     """
     returns formatted array information string
     """

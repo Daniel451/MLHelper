@@ -1,7 +1,14 @@
-*
 
-!MLHelper/
-!MLHelper/_image_label_reader
-!.gitignore
-!*.py
-!rebuild.sh
+\.idea/
+
+build/
+
+dist/
+
+MLHelper/__pycache__/
+
+MLHelper\.egg-info/
+
+MLHelper/datasets/__pycache__/
+
+*.pyc
