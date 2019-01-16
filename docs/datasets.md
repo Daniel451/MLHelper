@@ -6,6 +6,8 @@ Each top-level dataset is a named submodule, e.g. `MLHelper.datasets.bitbots`. T
 
 ##### Bit-Bots
 
+In order for Bit-Bots datasets to work you need to set the environment variable `ROBO_AI_DATA` via `export ROBO_AI_DATA=/path/to/root`. All Bit-Bots datasets need to reside in that directory.
+
 ```python
 bitbots.TRAIN.LEIPZIG
 bitbots.TRAIN.NAGOYA
