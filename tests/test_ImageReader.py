@@ -30,7 +30,7 @@ class TestImageReader(unittest.TestCase):
     def test_challenge2018(self):
         dat = H.ImgReader(BallDatasetHandler.TRAIN.CHALLENGE_2018,
                           batch_size=8)
-        # self.assertEqual(dat.get_dataset_size(), 16866)
+        self.assertEqual(dat.get_dataset_size(), 35327)
 
     def test_batch_size(self):
         batch, paths = TestImageReader.data.get_next_img_batch()

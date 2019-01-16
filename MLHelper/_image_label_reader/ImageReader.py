@@ -17,7 +17,7 @@ class Reader:
                  batch_size : int = 1,
                  queue_size : int = 16,
                  processes : int = None,
-                 img_dim : tuple = None,
+                 img_dim : tuple = (200, 150),
                  wait_for_queue_full = True,
                  filter_labels = False):
         """
