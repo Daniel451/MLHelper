@@ -15,6 +15,25 @@ class BallDatasetHandler:
                                         "CHALLENGE_2018",
                                         "ALL"])
 
+    _challenge2018 = ["bitbots-set00-01", "bitbots-set00-02", "bitbots-set00-03", "bitbots-set00-04",
+                      "bitbots-set00-05", "bitbots-set00-06", "bitbots-set00-07", "bitbots-set00-08",
+                      "bitbots-set00-09", "bitbots-set00-10", "bitbots-set00-11", "bitbots-set00-12",
+                      "bitbots-set00-13", "bitbots-set00-14", "bitbots-set00-15"]
+    _challenge2018.extend(["2017_nagoya/euro-ball-game-1",
+                           "2017_nagoya/sequences-euro-ball-robot-1",
+                           "2017_nagoya/sequences-jasper-euro-ball-1",
+                           "2017_nagoya/sequences-jasper-kicking-euro-ball",
+                           "2017_nagoya/sequences-misc-ball-1",
+                           "2017_nagoya/sequences-misc-ball-robot-1"])
+    _challenge2018.extend(["2018_iran/bitbots-2018-iran-01",
+                           "2018_iran/bitbots-2018-iran-03",
+                           "2018_iran/bitbots-2018-iran-04",
+                           "2018_iran/bitbots-2018-iran-05",
+                           "2018_iran/bitbots-2018-iran-06",
+                           "2018_iran/bitbots-2018-iran-game-01-mrl-bitbots"])
+    _challenge2018.extend(["2018_bitbotslab/bitbots-fifa18-high-res-01",
+                           "2018_bitbotslab/bitbots-fifa18-davros-01"])
+
     _data_leipzig = ["bitbots-set00-01", "bitbots-set00-02", "bitbots-set00-03", "bitbots-set00-04",
                      "bitbots-set00-05", "bitbots-set00-06", "bitbots-set00-07", "bitbots-set00-08",
                      "bitbots-set00-09", "bitbots-set00-10", "bitbots-set00-11", "bitbots-set00-12",
@@ -29,7 +48,6 @@ class BallDatasetHandler:
     _data_nagoya = ["2017_nagoya/" + e for e in _data_nagoya]
 
     _data_montreal = ["bitbots-fifa18-high-res-02",
-                      "bitbots-montreal-ball-close",
                       "montreal-game01",
                       "montreal-game02",
                       "montreal-game03",
@@ -61,9 +79,7 @@ class BallDatasetHandler:
         IRAN=prepend_data_path(_data_iran),
         MONTREAL=prepend_data_path(_data_montreal),
         BITBOTSLAB=prepend_data_path(_data_bitbotslab),
-        CHALLENGE_2018=prepend_data_path(
-            [e for e in chain(_data_leipzig, _data_nagoya, _data_iran, _data_bitbotslab)]
-        ),
+        CHALLENGE_2018=prepend_data_path(_challenge2018),
         ALL=prepend_data_path(
             [e for e in chain(_data_leipzig, _data_nagoya, _data_iran, _data_bitbotslab,
                               _data_montreal)]
