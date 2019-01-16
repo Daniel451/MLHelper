@@ -102,7 +102,7 @@ class Reader:
     def _worker(self):
         while True:
             # get next index delimiter
-            next_index = self._index_q.get()
+            next_index = self._index_q.get(block=True)
 
             # extract paths for the next image batch
             img_paths = self._random_img_paths[next_index : next_index + self._batch_size]
@@ -110,15 +110,19 @@ class Reader:
             buffer = list()
             for path in img_paths:
                 img_data = cv2.imread(path)
+                assert img_data is not None,\
+                    f"img_data is None, OpenCV could not read '{path}'"
                 if self._img_dim is not None:
                     img_data = cv2.resize(img_data, self._img_dim)
                 img_data = cv2.cvtColor(img_data, cv2.COLOR_BGR2RGB)
                 img_data = img_data.astype(np.float32) / 255.0
+                assert (img_data.ndim == 2 or img_data.ndim == 3),\
+                    f"img_data.ndim was '{img_data.ndim}', which is unsupported for images"
                 buffer.append(img_data)
             img_batch = np.array(buffer).astype(np.float32)
 
             # fill queue
-            self._q.put((img_batch, img_paths))
+            self._q.put((img_batch, img_paths), block=True)
 
 
     def _loading(self):
