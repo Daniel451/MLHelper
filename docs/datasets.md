@@ -12,6 +12,8 @@ In order for Bit-Bots datasets to work you need to set the environment variable 
 
 All Bit-Bots datasets need to reside in that directory.
 
+Available datasets:
+
 ```python
 bitbots.TRAIN.LEIPZIG
 bitbots.TRAIN.NAGOYA
