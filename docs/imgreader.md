@@ -1,6 +1,6 @@
 # ImgReader
 
-The `ImgReader` class is used to load images from various paths into NumPy arrays without considering any labels.
+The `ImgReader` class is used to load images from various paths into NumPy arrays without considering any labels. Currently, the `ImgReader` class creates an iterator to iterate over all images in a random order and shuffles its internal order after visiting each image exactly once. Future release will cover more features.
 
 ### Instantiate
 
