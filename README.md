@@ -1,6 +1,6 @@
 ## Documentation
 
-Check [daniel451.github.io/MLHelper](https://daniel451.github.io/MLHelper/)
+Visit: [daniel451.github.io/MLHelper](https://daniel451.github.io/MLHelper/)
 
 
 ## Installation
