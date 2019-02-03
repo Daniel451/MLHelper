@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def threshold_binary(heatmap: np.ndarray, threshold: float) -> np.ndarray[np.bool]:
+def threshold_binary(heatmap: np.ndarray, threshold: float) -> np.ndarray:
     """
     Returns a boolean array where each entry is True if the
     corresponding entry in heatmap >= the given threshold.
