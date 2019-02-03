@@ -3,21 +3,7 @@ import numpy as np
 
 
 
-def threshold_binary(heatmap: np.ndarray, threshold: float) -> np.ndarray[bool]:
-    """
-    Returns a boolean array where each entry is True if the
-    corresponding entry in heatmap >= the given threshold.
-
-    :param heatmap: input array
-    :param threshold: float threshold
-    :return: boolean array
-    """
-    arr = np.zeros_like(heatmap, dtype=np.bool)
-    arr[np.where(heatmap >= threshold)] = True
-    return arr
-
-
-def intersection_over_union(heatmap1: np.ndarray[bool], heatmap2: np.ndarray[bool]) -> float:
+def intersection_over_union(heatmap1: np.ndarray[np.bool], heatmap2: np.ndarray[np.bool]) -> float:
     """
     Metric. Returns the intersection over union (jaccard index) for two given heatmaps.
     Heatmaps need to be boolean arrays -> True for true positives, False otherwise.
@@ -37,7 +23,7 @@ def intersection_over_union(heatmap1: np.ndarray[bool], heatmap2: np.ndarray[boo
     return iou
 
 
-def metrics_tp_tn_fp_fn(prediction: np.ndarray[bool], ground_truth: np.ndarray[bool]) -> namedtuple:
+def metrics_tp_tn_fp_fn(prediction: np.ndarray[np.bool], ground_truth: np.ndarray[np.bool]) -> namedtuple:
     """
     Given two boolean heatmaps 'prediction' and 'ground_truth' this function computes the number of
     True Positives [TP], True Negatives [TN], False Positives [FP], False Negatives [FN] and returns
@@ -72,7 +58,7 @@ def metrics_tp_tn_fp_fn(prediction: np.ndarray[bool], ground_truth: np.ndarray[b
     return metrics(TP=TP, TN=TN, FP=FP, FN=FN, ALL=ALL)
 
 
-def confusion_matrix(prediction: np.ndarray[bool], ground_truth: np.ndarray[bool]) -> namedtuple:
+def confusion_matrix(prediction: np.ndarray[np.bool], ground_truth: np.ndarray[np.bool]) -> namedtuple:
     """
     Computes the confusion matrix of two boolean heatmaps 'prediction' and 'ground_truth'.
 
