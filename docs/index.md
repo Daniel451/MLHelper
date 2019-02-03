@@ -2,6 +2,13 @@
 
 MLHelper is a free-to-use pip module for machine learning experiments. 
 
+
+### Requirements
+
+ * OpenCV 3 or later
+ * Python 3.6 or later
+
+
 ### Installation
 
 You can install and update `MLHelper` directly via pip:
