@@ -3,6 +3,7 @@ from ._helper_functions import PAI as PAI
 from ._image_label_reader.ImageLabelReader import DataObject as ImgLblReader
 from ._image_label_reader.ImageReader import Reader as ImgReader
 from ._image_label_reader.ImageBatch import ImageBatch
+from ._image_label_reader.LabelObjects import Label2D
 
 from . import heatmap
 from . import noise
@@ -18,7 +19,7 @@ try:
     del _s
 except Exception as e:
     print(e)
-    print("please check your OpenCV installation")
+    exit("please check your OpenCV installation")
 
 
 
