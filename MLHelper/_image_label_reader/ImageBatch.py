@@ -4,7 +4,7 @@ from typing import List
 
 class ImageBatch:
 
-    def __init__(self, img_data : np.ndarray, labels : List):
+    def __init__(self, img_data: np.ndarray, labels: List):
         self._img_data = img_data
         self._labels = labels
 
@@ -17,7 +17,7 @@ class ImageBatch:
         return self._labels
 
 
-    def get_label_for_image(self, index : int):
+    def get_label_for_image(self, index: int):
         return self._labels[index]
 
 
