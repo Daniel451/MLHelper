@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="MLHelper",
-      version="0.2.5",
+      version="0.2.6",
       description="Collection of image/label readers and useful helper methods, mostly for manipulating arrays.",
       url="https://github.com/Daniel451/MLHelper",
       author="Daniel Speck",
