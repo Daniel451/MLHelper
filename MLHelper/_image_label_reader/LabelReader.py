@@ -8,17 +8,18 @@ from typing import List, Dict
 
 
 class Reader:
-    def __init__(self, pathlist: List[str], img_dim: tuple = None):
+    def __init__(self, pathlist: List[str], label_content: str, img_dim: tuple = None):
         """
         :param pathlist: a list containing valid paths that hold images
         :param img_dim: resize images to given dimensions - None by default
         """
         # init variables
         self._pathlist = pathlist
+        #TODO Add Labels (or here?)
+        self._label_content = label_content
         self._img_dim = img_dim
         self._labels = dict()
         self._set_img = set()
-        #TODO Add Labels (or here?)
         # check all paths for labels
         self._process_paths()
 
@@ -83,8 +84,11 @@ class Reader:
                     # filter not_in_image -> skip iteration
                     if "not_in_image" in sline:
                         continue
+                        #Ist das Label in der Zeile? Wenn ja tue es. Wenn nein gehe zur nächsten
+                    if label_content in sline:
                     elif sline.startswith("label::"):
                         #TODO: Add functionality to search for labels (dont read all label types)
+                        #Wahrscheinlich mit if self._label_content == label_type
                         try:
                             label_type, filename, img_width, img_height, \
                             x1, y1, x2, y2, \
@@ -135,6 +139,8 @@ class Reader:
                                 "center_y": center_y,
                                 "image_width": img_width,
                                 "image_height": img_height}
+                    elif:
+                        continue
 
                 print(f"read {counter} labels for set '{set_name}' from file '{filepath}'...")
 
