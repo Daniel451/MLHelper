@@ -18,7 +18,7 @@ class Reader:
         self._img_dim = img_dim
         self._labels = dict()
         self._set_img = set()
-
+        #TODO Add Labels (or here?)
         # check all paths for labels
         self._process_paths()
 
@@ -84,6 +84,7 @@ class Reader:
                     if "not_in_image" in sline:
                         continue
                     elif sline.startswith("label::"):
+                        #TODO: Add functionality to search for labels (dont read all label types)
                         try:
                             label_type, filename, img_width, img_height, \
                             x1, y1, x2, y2, \
