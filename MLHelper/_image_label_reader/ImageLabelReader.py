@@ -8,12 +8,12 @@ from .ImageBatch import ImageBatch
 class DataObject:
 #TODO Add labels here
     def __init__(self, pathlist : List[str],
+                 label_type : str,
                  batch_size : int = 1,
                  queue_size : int = 64,
                  img_dim : tuple = (200, 150),
                  processes : int = None,
-                 filter_labels = False,
-                 label_type : str ""):
+                 filter_labels = False):
         """
         constructor
 
