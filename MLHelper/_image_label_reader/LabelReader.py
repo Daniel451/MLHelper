@@ -15,7 +15,6 @@ class Reader:
         """
         # init variables
         self._pathlist = pathlist
-        #TODO Add Labels (or here?)
         self._label_content = label_content
         self._img_dim = img_dim
         self._labels = dict()
@@ -86,6 +85,7 @@ class Reader:
                     #TODO: Add functionality to search for labels (dont read all label types)
                     #Wahrscheinlich mit if self._label_type == label_type
                     elif sline.startswith("label::" + self._label_content):
+                        print("found label: " + self._label_content)
                         try:
                             label_type, filename, img_width, img_height, \
                             x1, y1, x2, y2, \
