@@ -27,7 +27,6 @@ class DataObject:
         self._labels = LblReader(self._pathlist, label_content=label_content, img_dim=img_dim)
         self._images = ImgReader(self._pathlist, batch_size=self._batch_size, queue_size=queue_size, img_dim=img_dim,
                                  filter_labels=filter_labels, processes=processes)
-        self._label_content = label_content
 
 
     def get_set_img(self):

@@ -139,7 +139,6 @@ class Reader:
 
                 print(f"read {counter} labels for set '{set_name}' from file '{filepath}'...")
 
-
     def get_pathlist(self):
         return self._pathlist
 
