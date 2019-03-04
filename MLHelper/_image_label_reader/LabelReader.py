@@ -32,7 +32,7 @@ class Reader:
         for fp in batch_filenames:
             buffer.append(self._labels[fp])
             with open("list_export_debug.txt", "a") as debug_file:
-                debug_file.write(self._labels[fp])
+                debug_file.write(str(self._labels[fp]))
                 debug_file.write("\n")
 
 
@@ -150,5 +150,5 @@ class Reader:
 if __name__ == "__main__":
     sets = ["bitbots-set00-02/", "bitbots-set00-03", "bitbots-set00-04"]
     paths = [os.environ["ROBO_AI_DATA"] + iset for iset in sets]
-    r = Reader(paths)
+    r = Reader(paths, label_content)
     print(len(r.get_label_dict()))
