@@ -29,9 +29,11 @@ class Reader:
         :param batch_filenames: a list (batch) of filenames/-paths of image files
         """
         buffer = list()
-
         for fp in batch_filenames:
             buffer.append(self._labels[fp])
+            with open("list_export_debug.txt", "a") as debug_file:
+                debug_file.write(self._labels[fp] + "\n")
+
 
         return buffer
 
