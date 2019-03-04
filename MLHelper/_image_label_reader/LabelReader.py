@@ -32,7 +32,8 @@ class Reader:
         for fp in batch_filenames:
             buffer.append(self._labels[fp])
             with open("list_export_debug.txt", "a") as debug_file:
-                debug_file.write(self._labels[fp] + "\n")
+                debug_file.write(self._labels[fp])
+                debug_file.write("\n")
 
 
         return buffer
