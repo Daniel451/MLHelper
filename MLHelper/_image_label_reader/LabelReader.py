@@ -31,7 +31,6 @@ class Reader:
         buffer = list()
         for fp in batch_filenames:
             buffer.append(self._labels[fp])
-            print(len(self._labels[fp]))
         return buffer
 
 
@@ -91,47 +90,47 @@ class Reader:
                             msg += f"exception: {e}"
                             msg += f"error occured for line:\n{line})"
                             exit(msg)
+                        #TODO: The actual Problem. Removed the if clause for test purposes
+                        #if not filename in self._labels:
+                        counter += 1
+                        x1 = int(x1.strip())
+                        y1 = int(y1.strip())
+                        x2 = int(x2.strip())
+                        y2 = int(y2.strip())
+                        img_width = int(img_width)
+                        img_height = int(img_height)
 
-                        if not filename in self._labels:
-                            counter += 1
-                            x1 = int(x1.strip())
-                            y1 = int(y1.strip())
-                            x2 = int(x2.strip())
-                            y2 = int(y2.strip())
-                            img_width = int(img_width)
-                            img_height = int(img_height)
+                        if self._img_dim is not None:
+                            xfactor = img_width / float(self._img_dim[0])
+                            yfactor = img_height / float(self._img_dim[1])
+                            x1 = math.floor(float(x1) / xfactor)
+                            y1 = math.floor(float(y1) / yfactor)
+                            x2 = math.ceil(float(x2) / xfactor)
+                            y2 = math.ceil(float(y2) / yfactor)
 
-                            if self._img_dim is not None:
-                                xfactor = img_width / float(self._img_dim[0])
-                                yfactor = img_height / float(self._img_dim[1])
-                                x1 = math.floor(float(x1) / xfactor)
-                                y1 = math.floor(float(y1) / yfactor)
-                                x2 = math.ceil(float(x2) / xfactor)
-                                y2 = math.ceil(float(y2) / yfactor)
+                        # calc width & height
+                        width = x2 - x1
+                        height = y2 - y1
 
-                            # calc width & height
-                            width = x2 - x1
-                            height = y2 - y1
+                        # calc center
+                        center_x = int(x1 + (width / 2.0))
+                        center_y = int(y1 + (height / 2.0))
 
-                            # calc center
-                            center_x = int(x1 + (width / 2.0))
-                            center_y = int(y1 + (height / 2.0))
+                        self._set_img.add(f"{set_name}/{filename}")
 
-                            self._set_img.add(f"{set_name}/{filename}")
-
-                            self._labels[os.path.join(dirpath, filename)] = {
-                                "set": set_name,
-                                "file": filename,
-                                "x1": x1,
-                                "y1": y1,
-                                "x2": x2,
-                                "y2": y2,
-                                "width": width,
-                                "height": height,
-                                "center_x": center_x,
-                                "center_y": center_y,
-                                "image_width": img_width,
-                                "image_height": img_height}
+                        self._labels[os.path.join(dirpath, filename)] = {
+                            "set": set_name,
+                            "file": filename,
+                            "x1": x1,
+                            "y1": y1,
+                            "x2": x2,
+                            "y2": y2,
+                            "width": width,
+                            "height": height,
+                            "center_x": center_x,
+                            "center_y": center_y,
+                            "image_width": img_width,
+                            "image_height": img_height}
 
                 print(f"read {counter} labels for set '{set_name}' from file '{filepath}'...")
 
