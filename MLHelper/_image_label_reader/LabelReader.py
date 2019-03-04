@@ -82,10 +82,7 @@ class Reader:
                     # filter not_in_image -> skip iteration
                     if "not_in_image" in sline:
                         continue
-                    #TODO: Add functionality to search for labels (dont read all label types)
-                    #Wahrscheinlich mit if self._label_type == label_type
                     elif sline.startswith("label::" + self._label_content):
-                        #print("found label: " + self._label_content)
                         try:
                             label_type, filename, img_width, img_height, \
                             x1, y1, x2, y2, \

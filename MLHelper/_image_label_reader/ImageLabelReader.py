@@ -6,7 +6,6 @@ from .ImageBatch import ImageBatch
 
 
 class DataObject:
-#TODO Add labels here
     def __init__(self, pathlist : List[str],
                  label_content : str = "",
                  batch_size : int = 1,

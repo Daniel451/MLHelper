@@ -22,7 +22,6 @@ class ImgFindFilter:
 
     @staticmethod
     def worker(path : str, label_content : str) -> np.ndarray:
-        #TODO: Sind jpg auch i.O.?
         images = glob.glob(os.path.join(path, "*.png"))
         images.extend(glob.glob(os.path.join(path, "*.jpg")))
 
@@ -48,7 +47,6 @@ class ImgFindFilter:
     @staticmethod
     def get_valid_labels_from_txt(txt, label_content : str):
         valid_filenames = set()
-        #TODO: wtf? Ball?
         with open(txt, "r") as f:
             for line in f:
                 if line.startswith("label::" + label_content) and "not_in_image" not in line:
