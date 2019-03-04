@@ -31,7 +31,7 @@ class Reader:
         buffer = list()
         for fp in batch_filenames:
             buffer.append(self._labels[fp])
-        print(len(buffer))
+            print(len(self._labels[fp]))
         return buffer
 
 
