@@ -14,6 +14,7 @@ from .PathImageFinderFilterLabels import ImgFindFilter
 class Reader:
 
     def __init__(self, pathlist : List[str],
+                 label_content: str,
                  batch_size : int = 1,
                  queue_size : int = 16,
                  processes : int = None,
@@ -42,6 +43,9 @@ class Reader:
 
         # load image paths
         self._loading()
+
+        # set label
+        self._label_content = label_content
 
         # setup iterator
         self._random_img_paths = self._img_paths.copy()
@@ -133,7 +137,7 @@ class Reader:
 
         # load image paths
         if self._filter_labels:
-            self._img_paths = ImgFindFilter.find_pngs(self._pathlist)
+            self._img_paths = ImgFindFilter.find_pngs(self._pathlist, self._label_content)
         else:
             self._img_paths = ImgFind.find_pngs(self._pathlist)
         self._dataset_size = self._img_paths.size

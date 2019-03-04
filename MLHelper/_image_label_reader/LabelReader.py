@@ -8,7 +8,7 @@ from typing import List, Dict
 
 
 class Reader:
-    def __init__(self, pathlist: List[str], label_content: str = "", img_dim: tuple = None):
+    def __init__(self, pathlist: List[str], label_content: str, img_dim: tuple = None):
         """
         :param pathlist: a list containing valid paths that hold images
         :param img_dim: resize images to given dimensions - None by default
@@ -85,7 +85,7 @@ class Reader:
                     #TODO: Add functionality to search for labels (dont read all label types)
                     #Wahrscheinlich mit if self._label_type == label_type
                     elif sline.startswith("label::" + self._label_content):
-                        print("found label: " + self._label_content)
+                        #print("found label: " + self._label_content)
                         try:
                             label_type, filename, img_width, img_height, \
                             x1, y1, x2, y2, \
