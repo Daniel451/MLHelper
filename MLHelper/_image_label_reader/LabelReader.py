@@ -29,11 +29,8 @@ class Reader:
         :param batch_filenames: a list (batch) of filenames/-paths of image files
         """
         buffer = list()
-        with open("list_export_debug.txt", "a") as debug_file:
-            for fp in batch_filenames:
-                buffer.append(self._labels[fp])
-                debug_file.write(str(self._labels[fp]))
-                debug_file.write("\n")
+        for fp in batch_filenames:
+            buffer.append(self._labels[fp])
 
 
         return buffer
@@ -149,6 +146,7 @@ class Reader:
 
 if __name__ == "__main__":
     sets = ["bitbots-set00-02/", "bitbots-set00-03", "bitbots-set00-04"]
+    label_content = ""
     paths = [os.environ["ROBO_AI_DATA"] + iset for iset in sets]
     r = Reader(paths, label_content)
     print(len(r.get_label_dict()))

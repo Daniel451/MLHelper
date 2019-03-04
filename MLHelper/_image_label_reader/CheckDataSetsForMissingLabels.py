@@ -28,6 +28,7 @@ buffer = list()
 for i in range(data.get_dataset_size() + 50):
     try:
         batch = data.get_next_batch()
+        #TODO: Uses actual only the first label. Must use every label!
         d = batch.get_labels()[0]
         print(f"[{i:0>5}/{data.get_dataset_size()}] [{len(buffer)} ERRORS]  checking '[{d['set']}/{d['file']}]'...")
 
