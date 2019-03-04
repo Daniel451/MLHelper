@@ -8,7 +8,8 @@ from .ImageReader import Reader
 
 sets = ["bitbots-set00-02/", "bitbots-set00-03", "bitbots-set00-04"]
 paths = [os.environ["ROBO_AI_DATA"] + iset for iset in sets]
-r = Reader(paths, batch_size=8)
+label_content = ""
+r = Reader(paths, label_content, batch_size=8)
 print(paths)
 
 rows = 2

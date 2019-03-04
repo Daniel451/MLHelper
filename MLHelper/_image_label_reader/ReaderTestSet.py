@@ -27,6 +27,7 @@ class DataObjectTestSet:
         self._queue_size = queue_size
         self._pathlist = pathlist
         self._batch_size = batch_size
+        #TODO: Fix LblReader with label_content
         self._labels = LblReader(self._pathlist, img_dim=img_dim)
         self._images = TestReader(self._pathlist, batch_size=self._batch_size, img_dim=img_dim, filter_labels=filter_labels)
 
