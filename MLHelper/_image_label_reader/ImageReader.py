@@ -41,11 +41,11 @@ class Reader:
         self._q = mp.Queue(self._queue_size)
         self._index_q = mp.Queue(20)
 
-        # load image paths
-        self._loading()
-
         # set label
         self._label_content = label_content
+
+        # load image paths
+        self._loading()
 
         # setup iterator
         self._random_img_paths = self._img_paths.copy()
