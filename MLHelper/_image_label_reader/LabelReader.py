@@ -32,6 +32,7 @@ class Reader:
         for fp in batch_filenames:
             buffer.append(dict(self._labels[fp]))
             print(self._labels[fp])
+            print(dict(self._labels[fp]))
 
         return buffer
 
