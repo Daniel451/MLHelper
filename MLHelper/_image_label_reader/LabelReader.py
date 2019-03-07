@@ -8,13 +8,14 @@ from typing import List, Dict
 
 
 class Reader:
-    def __init__(self, pathlist: List[str], img_dim: tuple = None):
+    def __init__(self, pathlist: List[str], label_content: str, img_dim: tuple = None):
         """
         :param pathlist: a list containing valid paths that hold images
         :param img_dim: resize images to given dimensions - None by default
         """
         # init variables
         self._pathlist = pathlist
+        self._label_content = label_content
         self._img_dim = img_dim
         self._labels = dict()
         self._set_img = set()
@@ -83,7 +84,7 @@ class Reader:
                     # filter not_in_image -> skip iteration
                     if "not_in_image" in sline:
                         continue
-                    elif sline.startswith("label::"):
+                    elif sline.startswith("label::" + self._label_content):
                         try:
                             label_type, filename, img_width, img_height, \
                             x1, y1, x2, y2, \
@@ -149,5 +150,6 @@ class Reader:
 if __name__ == "__main__":
     sets = ["bitbots-set00-02/", "bitbots-set00-03", "bitbots-set00-04"]
     paths = [os.environ["ROBO_AI_DATA"] + iset for iset in sets]
-    r = Reader(paths)
+    label_content = "ball"
+    r = Reader(paths, label_content)
     print(len(r.get_label_dict()))
