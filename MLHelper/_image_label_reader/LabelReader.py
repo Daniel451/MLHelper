@@ -1,4 +1,4 @@
-from collections import OrderedDict
+from collections import OrderedDict, defaultdict
 from typing import List, Iterable
 import sys, os
 import glob
@@ -17,7 +17,7 @@ class Reader:
         self._pathlist = pathlist
         self._label_content = label_content
         self._img_dim = img_dim
-        self._labels = dict()
+        self._labels = defaultdict()
         self._set_img = set()
         # check all paths for labels
         self._process_paths()
@@ -31,7 +31,6 @@ class Reader:
         buffer = list()
         for fp in batch_filenames:
             buffer.append(self._labels[fp])
-            print(len(self._labels[fp]))
         return buffer
 
 
