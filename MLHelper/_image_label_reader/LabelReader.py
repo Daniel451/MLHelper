@@ -118,8 +118,7 @@ class Reader:
                         center_y = int(y1 + (height / 2.0))
 
                         self._set_img.add(f"{set_name}/{filename}")
-                        if self._labels.get(os.path.join(dirpath, filename), False):
-
+                        if self._labels.get(os.path.join(dirpath, filename)), False):
                             self._labels[os.path.join(dirpath, filename)] = [
                                 ("set", set_name),
                                 ("file", filename),
