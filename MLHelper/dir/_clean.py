@@ -22,6 +22,10 @@ def force_clean_directory(path):
 
     :param path: path to clean
     """
+    if not os.path.exists(path):
+        print(f"path '{path}' does not exist.")
+        return
+
     print()
     print(f"cleaning path '{path}'...")
     if len(os.listdir(path)) > 0:
