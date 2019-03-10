@@ -11,6 +11,7 @@ from ._image_label_reader.LabelObjects import Label2D
 # submodules
 from . import heatmap
 from . import noise
+from . import dir
 
 
 # check for OpenCV 3
