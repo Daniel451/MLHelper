@@ -7,12 +7,12 @@ from .ImageBatch import ImageBatch
 
 class DataObject:
 
-    def __init__(self, pathlist : List[str],
-                 batch_size : int = 1,
-                 queue_size : int = 64,
-                 img_dim : tuple = (200, 150),
-                 processes : int = None,
-                 filter_labels = False):
+    def __init__(self, pathlist: List[str],
+                 batch_size: int = 1,
+                 queue_size: int = 64,
+                 img_dim: tuple = (200, 150),
+                 processes: int = None,
+                 filter_labels=False):
         """
         constructor
 
@@ -66,13 +66,3 @@ class DataObject:
         batch = ImageBatch(imgdata, labels)
 
         return batch
-
-
-
-
-
-
-
-
-
-
