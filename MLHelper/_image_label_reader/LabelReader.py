@@ -28,7 +28,7 @@ class Reader:
         :param batch_filenames: a list (batch) of filenames/-paths of image files
         """
         buffer = list()
-        counter = 0
+        #counter = 0
         #for fp in batch_filenames:
         #    #Workaround for stable interface. Need to be changed to return Lists with multiple labels
         #    buffer.append(dict(self._labels[fp]))
@@ -36,8 +36,9 @@ class Reader:
 
         for fp in batch_filenames:
             print(self._labels[fp])
-            buffer[counter] = self._labels[fp]
-            counter += 1
+            buffer.extend(self._labels[fp])
+            #counter += 1
+        print(buffer)
         return buffer
 
 
