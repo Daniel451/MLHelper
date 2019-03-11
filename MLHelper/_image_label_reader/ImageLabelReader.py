@@ -14,6 +14,7 @@ class DataObject:
                  img_dim : tuple = (200, 150),
                  processes : int = None,
                  filter_labels = False):
+    
         """
         constructor
 
@@ -67,13 +68,3 @@ class DataObject:
         batch = ImageBatch(imgdata, labels)
 
         return batch
-
-
-
-
-
-
-
-
-
-
