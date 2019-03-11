@@ -6,13 +6,11 @@ import cv2
 import multiprocessing as mp
 import time
 
-
 from .PathImageFinder import ImgFind
 from .PathImageFinderFilterLabels import ImgFindFilter
 
 
 class Reader:
-
     def __init__(self, pathlist : List[str],
                  label_content: str,
                  batch_size : int = 1,
@@ -109,18 +107,18 @@ class Reader:
             next_index = self._index_q.get(block=True)
 
             # extract paths for the next image batch
-            img_paths = self._random_img_paths[next_index : next_index + self._batch_size]
+            img_paths = self._random_img_paths[next_index: next_index + self._batch_size]
 
             buffer = list()
             for path in img_paths:
                 img_data = cv2.imread(path)
-                assert img_data is not None,\
+                assert img_data is not None, \
                     f"img_data is None, OpenCV could not read '{path}'"
                 if self._img_dim is not None:
                     img_data = cv2.resize(img_data, self._img_dim)
                 img_data = cv2.cvtColor(img_data, cv2.COLOR_BGR2RGB)
                 img_data = img_data.astype(np.float32) / 255.0
-                assert (img_data.ndim == 2 or img_data.ndim == 3),\
+                assert (img_data.ndim == 2 or img_data.ndim == 3), \
                     f"img_data.ndim was '{img_data.ndim}', which is unsupported for images"
                 buffer.append(img_data)
             img_batch = np.array(buffer).astype(np.float32)
@@ -147,7 +145,8 @@ class Reader:
         print("[total number of images]")
         print("{:.>24,}".format(self.get_dataset_size()))
         print()
-        print("[filepath array shape {} | array size {:,} KB]".format(self._img_paths.shape, self._img_paths.nbytes / 1000))
+        print("[filepath array shape {} | array size {:,} KB]".format(self._img_paths.shape,
+                                                                      self._img_paths.nbytes / 1000))
         print()
 
 
@@ -158,10 +157,8 @@ class Reader:
         return self._dataset_size
 
 
-
 if __name__ == "__main__":
     sets = ["bitbots-set00-02/", "bitbots-set00-03", "bitbots-set00-04"]
     paths = [os.environ["ROBO_AI_DATA"] + iset for iset in sets]
     label_content = "ball"
     r = Reader(paths, label_content, batch_size=8, queue_size=64)
-

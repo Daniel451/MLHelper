@@ -6,7 +6,6 @@ from .ImageBatch import ImageBatch
 
 
 class DataObject:
-
     def __init__(self, pathlist : List[str],
                  label_content : str = "",
                  batch_size : int = 1,
@@ -14,6 +13,7 @@ class DataObject:
                  img_dim : tuple = (200, 150),
                  processes : int = None,
                  filter_labels = False):
+
         """
         constructor
 
@@ -67,13 +67,3 @@ class DataObject:
         batch = ImageBatch(imgdata, labels)
 
         return batch
-
-
-
-
-
-
-
-
-
-
