@@ -6,7 +6,8 @@ def labels2D_rectangular(im_batch: np.ndarray, labels):
     labels2D = np.zeros(im_batch.shape[0:3], dtype=np.float32)
     shape_y = im_batch.shape[1]
     shape_x = im_batch.shape[2]
-    for k in labels:
+    for k in range(0, len(labels)):
+        print(k)
         labels[k] = dict(labels[k])
     # iterate over all batches
     for i, d in enumerate(labels):
