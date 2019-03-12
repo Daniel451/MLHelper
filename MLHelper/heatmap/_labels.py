@@ -10,6 +10,7 @@ def labels2D_rectangular(im_batch: np.ndarray, labels):
     #     for j in range (0, len(labels[k])):
     #         labels[k] = dict(labels[k])
     #iterate over all batches
+    print(labels)
     for i, d in enumerate(labels):
         print("i:" + str(i) + " d:" + str(d))
         for j in range (0, len(d)):
