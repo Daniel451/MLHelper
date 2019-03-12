@@ -13,7 +13,7 @@ def labels2D_rectangular(im_batch: np.ndarray, labels):
     for i, d in enumerate(labels):
         for k in range(0, len(labels)):
             for j in range (0, len(labels[k])):
-                labels[k] = dict(labels[k])
+                labels[j] = dict(labels[j])
                 labels2D[i, d["y1"]: d["y1"] + d["height"], d["x1"]: d["x1"] + d["width"]] = 1.0
 
     return labels2D.reshape(-1, shape_y, shape_x, 1)
