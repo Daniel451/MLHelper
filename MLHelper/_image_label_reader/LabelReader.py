@@ -125,7 +125,7 @@ class Reader:
                         self._set_img.add(f"{set_name}/{filename}")
 
                         if self._labels.get(os.path.join(dirpath, filename)) == None :
-                            self._labels[os.path.join(dirpath, filename)] = [
+                            self._labels[os.path.join(dirpath, filename)] = [[
                                 ("set", set_name),
                                 ("file", filename),
                                 ("x1", x1),
@@ -137,12 +137,12 @@ class Reader:
                                 ("center_x", center_x),
                                 ("center_y", center_y),
                                 ("image_width", img_width),
-                                ("image_height", img_height)]
+                                ("image_height", img_height)]]
                         
                         else:
                             self._labels[os.path.join(dirpath, filename)] =\
                                 self._labels[os.path.join(dirpath, filename)] +\
-                                [("set", set_name),
+                                [[("set", set_name),
                                 ("file", filename),
                                 ("x1", x1),
                                 ("y1", y1),
@@ -153,7 +153,7 @@ class Reader:
                                 ("center_x", center_x),
                                 ("center_y", center_y),
                                 ("image_width", img_width),
-                                ("image_height", img_height)]
+                                ("image_height", img_height)]]
 
 
                 print(f"read {counter} labels for set '{set_name}' from file '{filepath}'...")
