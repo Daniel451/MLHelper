@@ -28,10 +28,14 @@ class Reader:
         :param batch_filenames: a list (batch) of filenames/-paths of image files
         """
         buffer = list()
+        #counter = 0
+        #for fp in batch_filenames:
+        #    #Workaround for stable interface. Need to be changed to return Lists with multiple labels
+        #    buffer.append(dict(self._labels[fp]))
+        #    print(len(self._labels[fp]))
 
         for fp in batch_filenames:
-            #Workaround for stable interface. Need to be changed to return Lists with multiple labels
-            buffer.append(dict(self._labels[fp]))
+            buffer.extend([self._labels[fp]])
         return buffer
 
 
@@ -121,7 +125,7 @@ class Reader:
                         self._set_img.add(f"{set_name}/{filename}")
 
                         if self._labels.get(os.path.join(dirpath, filename)) == None :
-                            self._labels[os.path.join(dirpath, filename)] = [
+                            self._labels[os.path.join(dirpath, filename)] = [[
                                 ("set", set_name),
                                 ("file", filename),
                                 ("x1", x1),
@@ -133,12 +137,12 @@ class Reader:
                                 ("center_x", center_x),
                                 ("center_y", center_y),
                                 ("image_width", img_width),
-                                ("image_height", img_height)]
+                                ("image_height", img_height)]]
                         
                         else:
                             self._labels[os.path.join(dirpath, filename)] =\
                                 self._labels[os.path.join(dirpath, filename)] +\
-                                [("set", set_name),
+                                [[("set", set_name),
                                 ("file", filename),
                                 ("x1", x1),
                                 ("y1", y1),
@@ -149,7 +153,7 @@ class Reader:
                                 ("center_x", center_x),
                                 ("center_y", center_y),
                                 ("image_width", img_width),
-                                ("image_height", img_height)]
+                                ("image_height", img_height)]]
 
 
                 print(f"read {counter} labels for set '{set_name}' from file '{filepath}'...")

@@ -12,6 +12,7 @@ from .ImageBatch import ImageBatch
 class DataObjectTestSet:
 
     def __init__(self, pathlist: List[str],
+                 label_content: str ="",
                  batch_size: int = 1,
                  queue_size: int = 16,
                  img_dim: tuple = None,
@@ -27,7 +28,7 @@ class DataObjectTestSet:
         self._queue_size = queue_size
         self._pathlist = pathlist
         self._batch_size = batch_size
-        self._labels = LblReader(self._pathlist, img_dim=img_dim)
+        self._labels = LblReader(self._pathlist, label_content=label_content, img_dim=img_dim)
         self._images = TestReader(self._pathlist, batch_size=self._batch_size, img_dim=img_dim, filter_labels=filter_labels)
 
         # load data in RAM
@@ -84,5 +85,6 @@ class DataObjectTestSet:
 if __name__ == "__main__":
     set_paths = BallDatasetHandler.TEST.CHALLENGE_2018
     starting = time.time()
-    data = DataObjectTestSet(set_paths, batch_size=16, queue_size=16, img_dim=(200, 150))
+    label_content="Ball"
+    data = DataObjectTestSet(set_paths, label_content=label_content, batch_size=16, queue_size=16, img_dim=(200, 150))
     print(time.time()-starting)
