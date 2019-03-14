@@ -166,9 +166,6 @@ class Reader:
     def get_label_dict(self) -> dict:
         return self._labels
 
-    def get_labels(self):
-        return self._labels
-
 if __name__ == "__main__":
     sets = ["bitbots-set00-02/", "bitbots-set00-03", "bitbots-set00-04"]
     paths = [os.environ["ROBO_AI_DATA"] + iset for iset in sets]
