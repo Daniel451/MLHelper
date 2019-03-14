@@ -9,7 +9,9 @@ def labels2D_rectangular(im_batch: np.ndarray, labels):
 
     # iterate over all batches
     for i, d in enumerate(labels):
-        labels2D[i, d["y1"]: d["y1"] + d["height"], d["x1"]: d["x1"] + d["width"]] = 1.0
+        for j in range (0, len(d)):
+            b = dict(d[j])
+            labels2D[i, b["y1"]: b["y1"] + b["height"], b["x1"]: b["x1"] + b["width"]] = 1.0
 
     return labels2D.reshape(-1, shape_y, shape_x, 1)
 
@@ -23,12 +25,13 @@ def labels2D_circular(im_batch, labels):
     for i, d in enumerate(labels):
         y = np.arange(0, shape_y)
         x = np.arange(0, shape_x)
+        for j in range (0, len(d)):
+            b = dict(d[j])
+            cy = d["center_y"]
+            cx = d["center_x"]
+            r = int(((d["width"] / 2) + (d["height"] / 2)) / 2) + 1
 
-        cy = d["center_y"]
-        cx = d["center_x"]
-        r = int(((d["width"] / 2) + (d["height"] / 2)) / 2) + 1
-
-        mask = (x[np.newaxis, :] - cx) ** 2 + (y[:, np.newaxis] - cy) ** 2 < r ** 2
-        labels2D[i][mask] = 1.0
+            mask = (x[np.newaxis, :] - cx) ** 2 + (y[:, np.newaxis] - cy) ** 2 < r ** 2
+            labels2D[i][mask] = 1.0
 
     return labels2D.reshape(-1, shape_y, shape_x, 1)
