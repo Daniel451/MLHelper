@@ -56,6 +56,12 @@ class DataObject:
         """
         return self._pathlist
 
+    def get_labelset_size(self):
+        """
+        returns the size of the pictures with labels -> total number of files
+        """
+        return len(self._labels.get_labels())
+
 
     def get_next_batch(self) -> ImageBatch:
         """
