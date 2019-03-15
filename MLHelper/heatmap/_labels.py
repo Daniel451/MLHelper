@@ -7,12 +7,8 @@ def labels2D_rectangular(im_batch: np.ndarray, labels):
     shape_y = im_batch.shape[1]
     shape_x = im_batch.shape[2]
     for i, d in enumerate(labels):
-        #print("i:" + str(i) + " d:" + str(d))
         for j in range (0, len(d)):
-            #print("j:" + str(j) + "\n d[j]:")
-            #print(d[j])
             b = dict(d[j])
-            #print(b)
             labels2D[i, b["y1"]: b["y1"] + b["height"], b["x1"]: b["x1"] + b["width"]] = 1.0
 
     return labels2D.reshape(-1, shape_y, shape_x, 1)
