@@ -3,7 +3,8 @@ import os
 import glob
 import math
 from typing import List, Dict
-from collections import defaultdict, namedtuple
+from collections import defaultdict
+from .LabelDataTuple import LabelDataTuple
 
 
 class Reader:
@@ -121,20 +122,24 @@ class Reader:
 
                             self._set_img.add(f"{set_name}/{filename}")
 
-                            self._labels[os.path.join(dirpath, filename)].append([
-                                    ("set", set_name),
-                                    ("file", filename),
-                                    ("x1", x1),
-                                    ("y1", y1),
-                                    ("x2", x2),
-                                    ("y2", y2),
-                                    ("width", width),
-                                    ("height", height),
-                                    ("center_x", center_x),
-                                    ("center_y", center_y),
-                                    ("image_width", img_width),
-                                    ("image_height", img_height),
-                                    ("image_height", img_height)])
+                            # create a namedtuple to store label information
+                            ldt = LabelDataTuple(
+                                set=set_name,
+                                file=filename,
+                                x1=x1,
+                                y1=y1,
+                                x2=x2,
+                                y2=y2,
+                                width=width,
+                                height=height,
+                                center_x=center_x,
+                                center_y=center_y,
+                                image_width=img_width,
+                                image_height=img_height
+                            )
+
+                            # add tuple to label information for current image
+                            self._labels[os.path.join(dirpath, filename)].append(ldt)
 
                 print(f"read {counter} labels for set '{set_name}' from file '{filepath}'...")
 
