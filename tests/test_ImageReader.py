@@ -9,7 +9,8 @@ class TestImageReader(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         TestImageReader.data = H.ImgReader(BallDatasetHandler.TRAIN.LEIPZIG,
-                                           batch_size=8)
+                                           batch_size=8,
+                                           label_content="ball")
 
     def test_instantiation(self):
         self.assertIsNotNone(TestImageReader.data)
@@ -19,17 +20,20 @@ class TestImageReader(unittest.TestCase):
 
     def test_nagoya_and_size(self):
         dat = H.ImgReader(BallDatasetHandler.TRAIN.NAGOYA,
-                          batch_size=8)
+                          batch_size=8,
+                          label_content="ball")
         self.assertEqual(dat.get_dataset_size(), 8243)
 
     def test_montreal_and_size(self):
         dat = H.ImgReader(BallDatasetHandler.TRAIN.MONTREAL,
-                          batch_size=8)
+                          batch_size=8,
+                          label_content="ball")
         self.assertEqual(dat.get_dataset_size(), 16866)
 
     def test_challenge2018(self):
         dat = H.ImgReader(BallDatasetHandler.TRAIN.CHALLENGE_2018,
-                          batch_size=8)
+                          batch_size=8,
+                          label_content="ball")
         # 35327 is the number of ball annotations
         # self.assertEqual(dat.get_dataset_size(), 35327)
         # number of images is 35952
