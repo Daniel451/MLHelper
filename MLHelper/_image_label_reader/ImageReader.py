@@ -12,14 +12,13 @@ from .PathImageFinderFilterLabels import ImgFindFilter
 
 class Reader:
     def __init__(self, pathlist : List[str],
-                 label_content: str,
+                 label_content: str = None,
                  batch_size : int = 1,
                  queue_size : int = 16,
                  processes : int = None,
                  img_dim : tuple = (200, 150),
                  wait_for_queue_full = True,
                  filter_labels = False):
-
         """
         :param pathlist: a list containing valid paths that hold images
         :param batch_size: size of the image data batches that will be loaded
@@ -135,7 +134,7 @@ class Reader:
         print()
 
         # load image paths
-        if self._filter_labels:
+        if self._filter_labels and self._label_content is not None:
             self._img_paths = ImgFindFilter.find_pngs(self._pathlist, self._label_content)
         else:
             self._img_paths = ImgFind.find_pngs(self._pathlist)
