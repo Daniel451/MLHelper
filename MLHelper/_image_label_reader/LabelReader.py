@@ -4,6 +4,7 @@ import glob
 import math
 from typing import List, Dict
 from collections import defaultdict
+from .LabelObjects import LabelBoundingBox2D
 
 
 class Reader:
@@ -103,6 +104,9 @@ class Reader:
                             img_width = int(img_width)
                             img_height = int(img_height)
 
+                            # if images are resized dynamically,
+                            # coordinates need to be re-calculated
+                            # in order to match new image dimensions
                             if self._img_dim is not None:
                                 xfactor = img_width / float(self._img_dim[0])
                                 yfactor = img_height / float(self._img_dim[1])
@@ -111,34 +115,22 @@ class Reader:
                                 x2 = math.ceil(float(x2) / xfactor)
                                 y2 = math.ceil(float(y2) / yfactor)
 
-                            # calc width & height
-                            width = x2 - x1
-                            height = y2 - y1
-
-                            # calc center
-                            center_x = int(x1 + (width / 2.0))
-                            center_y = int(y1 + (height / 2.0))
-
                             self._set_img.add(f"{set_name}/{filename}")
 
                             # create a namedtuple to store label information
-                            ldt = LabelDataTuple(
-                                set=set_name,
-                                file=filename,
+                            bbx = LabelBoundingBox2D(
                                 x1=x1,
                                 y1=y1,
                                 x2=x2,
                                 y2=y2,
-                                width=width,
-                                height=height,
-                                center_x=center_x,
-                                center_y=center_y,
                                 image_width=img_width,
-                                image_height=img_height
+                                image_height=img_height,
+                                set_name=set_name,
+                                filename=filename
                             )
 
                             # add tuple to label information for current image
-                            self._labels[os.path.join(dirpath, filename)].append(ldt)
+                            self._labels[os.path.join(dirpath, filename)].append(bbx)
 
                 print(f"read {counter} labels for set '{set_name}' from file '{filepath}'...")
 
