@@ -1,9 +1,9 @@
 import numpy as np
 from typing import List
-from .._image_label_reader.LabelDataTuple import LabelDataTuple
+from .._image_label_reader.LabelObjects import LabelBoundingBox2D
 
 
-def labels2D_rectangular(im_batch: np.ndarray, labels: List[LabelDataTuple]):
+def labels2D_rectangular(im_batch: np.ndarray, labels: List[List[LabelBoundingBox2D]]):
     # buffer
     labels2D = np.zeros(im_batch.shape[0:3], dtype=np.float32)
     shape_y = im_batch.shape[1]

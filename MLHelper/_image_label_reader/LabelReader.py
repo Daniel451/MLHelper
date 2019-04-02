@@ -4,7 +4,6 @@ import glob
 import math
 from typing import List, Dict
 from collections import defaultdict
-from .LabelDataTuple import LabelDataTuple
 
 
 class Reader:

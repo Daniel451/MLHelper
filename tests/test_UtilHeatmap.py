@@ -78,6 +78,10 @@ class TestUtilHeatmap(unittest.TestCase):
 
         self.assertTrue(np.array_equal(cfm, self.confusion_matrix))
 
+    def test_heatmap_labels2D_rectangular(self):
+        imgs = np.zeros(shape=(2, 10, 10, 1), dtype=np.float32)
+
+
 
 
 
