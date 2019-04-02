@@ -79,7 +79,33 @@ class TestUtilHeatmap(unittest.TestCase):
         self.assertTrue(np.array_equal(cfm, self.confusion_matrix))
 
     def test_heatmap_labels2D_rectangular(self):
-        imgs = np.zeros(shape=(2, 10, 10, 1), dtype=np.float32)
+        # set up dummy data
+        heatmap = np.zeros(shape=(2, 10, 10, 1), dtype=np.float32)
+        heatmap[0, 1:4, 1:4, :] = 1.0
+        heatmap[1, 5:10, 7:10, :] = 1.0
+
+        # set up dummy labels
+        bbx1 = H.LabelBoundingBox2D(
+            x1=1,
+            y1=1,
+            x2=3,
+            y2=3
+        )
+
+        bbx2 = H.LabelBoundingBox2D(
+            x1=7,
+            y1=5,
+            x2=9,
+            y2=9
+        )
+
+        labels = [[bbx1], [bbx2]]
+
+        ret = H.heatmap.labels2D_rectangular(heatmap, labels)
+
+        self.assertTrue(np.array_equal(heatmap, ret))
+
+
 
 
 
