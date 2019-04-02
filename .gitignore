@@ -12,3 +12,5 @@ MLHelper\.egg-info/
 MLHelper/datasets/__pycache__/
 
 *.pyc
+
+.vscode/

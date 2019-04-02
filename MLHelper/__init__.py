@@ -7,6 +7,7 @@ from ._image_label_reader.ImageLabelReader import DataObject as ImgLblReader
 from ._image_label_reader.ImageReader import Reader as ImgReader
 from ._image_label_reader.ImageBatch import ImageBatch
 from ._image_label_reader.LabelObjects import Label2D
+from ._image_label_reader.LabelDataTuple import LabelDataTuple
 
 # submodules
 from . import heatmap

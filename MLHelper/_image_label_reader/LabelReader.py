@@ -3,18 +3,21 @@ import os
 import glob
 import math
 from typing import List, Dict
+from collections import defaultdict
+from .LabelDataTuple import LabelDataTuple
 
 
 class Reader:
-    def __init__(self, pathlist: List[str], img_dim: tuple = None):
+    def __init__(self, pathlist: List[str], label_content: str, img_dim: tuple = None):
         """
         :param pathlist: a list containing valid paths that hold images
         :param img_dim: resize images to given dimensions - None by default
         """
         # init variables
         self._pathlist = pathlist
+        self._label_content = label_content
         self._img_dim = img_dim
-        self._labels = dict()
+        self._labels = defaultdict(list)
         self._set_img = set()
 
         # check all paths for labels
@@ -81,7 +84,7 @@ class Reader:
                     # filter not_in_image -> skip iteration
                     if "not_in_image" in sline:
                         continue
-                    elif sline.startswith("label::"):
+                    elif sline.startswith("label::" + self._label_content):
                         try:
                             label_type, filename, img_width, img_height, \
                             x1, y1, x2, y2, \
@@ -119,19 +122,24 @@ class Reader:
 
                             self._set_img.add(f"{set_name}/{filename}")
 
-                            self._labels[os.path.join(dirpath, filename)] = {
-                                "set": set_name,
-                                "file": filename,
-                                "x1": x1,
-                                "y1": y1,
-                                "x2": x2,
-                                "y2": y2,
-                                "width": width,
-                                "height": height,
-                                "center_x": center_x,
-                                "center_y": center_y,
-                                "image_width": img_width,
-                                "image_height": img_height}
+                            # create a namedtuple to store label information
+                            ldt = LabelDataTuple(
+                                set=set_name,
+                                file=filename,
+                                x1=x1,
+                                y1=y1,
+                                x2=x2,
+                                y2=y2,
+                                width=width,
+                                height=height,
+                                center_x=center_x,
+                                center_y=center_y,
+                                image_width=img_width,
+                                image_height=img_height
+                            )
+
+                            # add tuple to label information for current image
+                            self._labels[os.path.join(dirpath, filename)].append(ldt)
 
                 print(f"read {counter} labels for set '{set_name}' from file '{filepath}'...")
 
@@ -147,5 +155,6 @@ class Reader:
 if __name__ == "__main__":
     sets = ["bitbots-set00-02/", "bitbots-set00-03", "bitbots-set00-04"]
     paths = [os.environ["ROBO_AI_DATA"] + iset for iset in sets]
-    r = Reader(paths)
+    label_content = "ball"
+    r = Reader(paths, label_content)
     print(len(r.get_label_dict()))

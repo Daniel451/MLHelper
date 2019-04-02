@@ -11,14 +11,14 @@ from .PathImageFinderFilterLabels import ImgFindFilter
 
 
 class Reader:
-
-    def __init__(self, pathlist: List[str],
-                 batch_size: int = 1,
-                 queue_size: int = 16,
-                 processes: int = None,
-                 img_dim: tuple = (200, 150),
-                 wait_for_queue_full=True,
-                 filter_labels=False):
+    def __init__(self, pathlist : List[str],
+                 label_content: str = None,
+                 batch_size : int = 1,
+                 queue_size : int = 16,
+                 processes : int = None,
+                 img_dim : tuple = (200, 150),
+                 wait_for_queue_full = True,
+                 filter_labels = False):
         """
         :param pathlist: a list containing valid paths that hold images
         :param batch_size: size of the image data batches that will be loaded
@@ -38,6 +38,9 @@ class Reader:
         # data queue
         self._q = mp.Queue(self._queue_size)
         self._index_q = mp.Queue(20)
+
+        # set label
+        self._label_content = label_content
 
         # load image paths
         self._loading()
@@ -131,8 +134,8 @@ class Reader:
         print()
 
         # load image paths
-        if self._filter_labels:
-            self._img_paths = ImgFindFilter.find_pngs(self._pathlist)
+        if self._filter_labels and self._label_content is not None:
+            self._img_paths = ImgFindFilter.find_pngs(self._pathlist, self._label_content)
         else:
             self._img_paths = ImgFind.find_pngs(self._pathlist)
         self._dataset_size = self._img_paths.size
@@ -157,4 +160,5 @@ class Reader:
 if __name__ == "__main__":
     sets = ["bitbots-set00-02/", "bitbots-set00-03", "bitbots-set00-04"]
     paths = [os.environ["ROBO_AI_DATA"] + iset for iset in sets]
-    r = Reader(paths, batch_size=8, queue_size=64)
+    label_content = "ball"
+    r = Reader(paths, label_content, batch_size=8, queue_size=64)
