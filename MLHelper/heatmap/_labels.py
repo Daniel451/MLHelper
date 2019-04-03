@@ -13,7 +13,7 @@ def labels2D_rectangular(im_batch: np.ndarray, labels: List[List[LabelBoundingBo
     for i, label_list in enumerate(labels):
         # iterate over all LabelDataTuples for current image
         for bbx in label_list:
-            labels2D[i, bbx.y1 : bbx.y1+bbx.height, bbx.x1 : bbx.x1+bbx.width] = 1.0
+            labels2D[i, bbx.y1 : bbx.y1+bbx.height+1, bbx.x1 : bbx.x1+bbx.width+1] = 1.0
 
     return labels2D.reshape(-1, shape_y, shape_x, 1)
 

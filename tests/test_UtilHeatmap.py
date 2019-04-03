@@ -80,9 +80,11 @@ class TestUtilHeatmap(unittest.TestCase):
 
     def test_heatmap_labels2D_rectangular(self):
         # set up dummy data
-        heatmap = np.zeros(shape=(2, 10, 10, 1), dtype=np.float32)
-        heatmap[0, 1:4, 1:4, :] = 1.0
-        heatmap[1, 5:10, 7:10, :] = 1.0
+        heatmap = np.zeros(shape=(3, 10, 10, 1), dtype=np.float32)
+        heatmap[0, 1:4, 1:4, :] = 1.0     # 0: top left
+        heatmap[1, 5:10, 7:10, :] = 1.0   # 1: bottom right
+        heatmap[2, 1:4, 1:4, :] = 1.0     # 2: both
+        heatmap[2, 5:10, 7:10, :] = 1.0
 
         # set up dummy labels
         bbx1 = H.LabelBoundingBox2D(
@@ -99,7 +101,7 @@ class TestUtilHeatmap(unittest.TestCase):
             y2=9
         )
 
-        labels = [[bbx1], [bbx2]]
+        labels = [[bbx1], [bbx2], [bbx1, bbx2]]
 
         ret = H.heatmap.labels2D_rectangular(heatmap, labels)
 
