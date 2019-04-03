@@ -78,7 +78,7 @@ class TestUtilHeatmap(unittest.TestCase):
 
         self.assertTrue(np.array_equal(cfm, self.confusion_matrix))
 
-    def test_heatmap_labels2D_rectangular(self):
+    def test_heatmap_labels2D_rectangular_dummy_data(self):
         # set up dummy data
         heatmap = np.zeros(shape=(3, 10, 10, 1), dtype=np.float32)
         heatmap[0, 1:4, 1:4, :] = 1.0     # 0: top left
