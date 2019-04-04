@@ -27,7 +27,7 @@ class TestImageReader(unittest.TestCase):
                           batch_size=8,
                           label_content="ball",
                           filter_labels=True)
-        self.assertEqual(TestImageReader.data.get_dataset_size(), 14684)
+        self.assertEqual(dat.get_dataset_size(), 14684)
 
 
     def test_nagoya_and_size(self):
