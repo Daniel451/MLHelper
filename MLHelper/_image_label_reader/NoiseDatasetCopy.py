@@ -6,9 +6,7 @@ import os
 import sys
 import cv2
 from shutil import copyfile
-
-sys.path.append(os.environ["ROBO_AI_CODE"])
-from helper.tf_helper import Helper as H
+import MLHelper as H
 
 
 
@@ -22,7 +20,7 @@ if __name__ == "__main__":
         raise IOError(f"path '{args.imageset}' does not exist.")
 
     if os.path.exists(args.save_path):
-        H.clean_directory(args.save_path)
+        H.dir.clean_directory(args.save_path)
     else:
         os.makedirs(args.save_path)
 
@@ -44,8 +42,7 @@ if __name__ == "__main__":
         im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
         im = im.astype(np.float32) / 255.0
 
-        # todo: implement locally
-        noised = H.random_motionblur_img(im)
+        noised = H.noise.random_motionblur_img(im)
 
         noised = noised * 255.0
         noised = noised.astype(np.uint8)
