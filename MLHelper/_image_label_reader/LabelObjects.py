@@ -1,4 +1,4 @@
-class Label2D:
+class LabelBoundingBox2D:
 
     def __init__(self, x1: int, y1: int, x2: int, y2: int,
                  image_width: int = None, image_height: int = None,
@@ -25,7 +25,7 @@ class Label2D:
 
 
     def __eq__(self, other):
-        if not isinstance(other, Label2D):
+        if not isinstance(other, LabelBoundingBox2D):
             return False
 
         return self.x1 == other.x1 \

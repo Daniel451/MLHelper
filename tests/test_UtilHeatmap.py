@@ -78,6 +78,71 @@ class TestUtilHeatmap(unittest.TestCase):
 
         self.assertTrue(np.array_equal(cfm, self.confusion_matrix))
 
+    def test_heatmap_labels2D_rectangular_dummy_data(self):
+        # set up dummy data
+        heatmap = np.zeros(shape=(3, 10, 10, 1), dtype=np.float32)
+        heatmap[0, 1:4, 1:4, :] = 1.0     # 0: top left
+        heatmap[1, 5:10, 7:10, :] = 1.0   # 1: bottom right
+        heatmap[2, 1:4, 1:4, :] = 1.0     # 2: both
+        heatmap[2, 5:10, 7:10, :] = 1.0
+
+        # set up dummy labels
+        bbx1 = H.LabelBoundingBox2D(
+            x1=1,
+            y1=1,
+            x2=3,
+            y2=3
+        )
+
+        bbx2 = H.LabelBoundingBox2D(
+            x1=7,
+            y1=5,
+            x2=9,
+            y2=9
+        )
+
+        labels = [[bbx1], [bbx2], [bbx1, bbx2]]
+
+        ret = H.heatmap.labels2D_rectangular(heatmap, labels)
+
+        self.assertTrue(np.array_equal(heatmap, ret))
+
+
+    # def test_heatmap_labels2D_circular_dummy_data(self):
+    #     set up dummy data
+        # heatmap = np.zeros(shape=(3, 20, 20, 1), dtype=np.float32)
+        # heatmap[0, 2:10, 2:10, :] = 1.0     # 0: top left
+        # heatmap[1, 12:20, 15:20, :] = 1.0   # 1: bottom right
+        # heatmap[2, 2:10, 2:10, :] = 1.0     # 2: both
+        # heatmap[2, 12:20, 15:20, :] = 1.0
+
+        # set up dummy labels
+        # bbx1 = H.LabelBoundingBox2D(
+        #     x1=2,
+        #     y1=2,
+        #     x2=10,
+        #     y2=10
+        # )
+        #
+        # bbx2 = H.LabelBoundingBox2D(
+        #     x1=15,
+        #     y1=12,
+        #     x2=20,
+        #     y2=20
+        # )
+        #
+        # labels = [[bbx1], [bbx2], [bbx1, bbx2]]
+        #
+        # ret = H.heatmap.labels2D_circular(heatmap, labels)
+        #
+        # print(ret[0].reshape(20, 20))
+        # print("-----------------------------------------------------")
+        # print(ret[1].reshape(20, 20))
+        # print("-----------------------------------------------------")
+        # print(ret[2].reshape(20, 20))
+        # self.assertTrue(np.array_equal(heatmap, ret))
+
+
 
 
 
