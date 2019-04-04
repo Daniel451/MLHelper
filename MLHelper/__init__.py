@@ -5,6 +5,7 @@ from ._helper_functions import PAI as PAI
 # top-level objects and functions
 from ._image_label_reader.ImageLabelReader import DataObject as ImgLblReader
 from ._image_label_reader.ImageReader import Reader as ImgReader
+from ._image_label_reader.LabelReader import Reader as LblReader
 from ._image_label_reader.ImageBatch import ImageBatch
 from ._image_label_reader.LabelObjects import LabelBoundingBox2D
 
