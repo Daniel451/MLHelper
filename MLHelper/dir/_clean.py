@@ -37,7 +37,7 @@ def force_clean_directory(path, rm_subdirs: bool = False):
                 print(f"deleting '{p}'")
                 os.unlink(p)
             # dir
-            if os.path.isdir(p):
+            elif os.path.isdir(p) and rm_subdirs:
                 shutil.rmtree(p, ignore_errors=True)
 
         print(f"path '{path}' is clean now.")

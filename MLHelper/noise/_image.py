@@ -3,6 +3,19 @@ import random
 import cv2
 
 
+def overwrite_black_areas_from_im1_with_im2(im1, im2):
+    """
+    overwrites black (=0) areas in image1 with information from image2
+    :param im1: image /np.ndarray
+    :param im2: image /np.ndarray
+    :return:
+    """
+    idx = np.where(im1 == 0)
+    im1[idx] = im2[idx]
+
+    return im1
+
+
 def motionblur_img(im: np.ndarray, tr_x: float, tr_y: float, k=None):
     """
     motion blur's an image using image translating, blending and gaussian blurring
@@ -13,11 +26,6 @@ def motionblur_img(im: np.ndarray, tr_x: float, tr_y: float, k=None):
     :param k: gaussian noise kernel (optional; if None a random kernel will be computed)
     :return: blurred image
     """
-    def overwrite_black_areas_from_im1_with_im2(im1, im2):
-        idx = np.where(im1 == 0)
-        im1[idx] = im2[idx]
-
-        return im1
 
     # extract height and width
     h, w = im.shape[0:2]

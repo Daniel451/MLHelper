@@ -8,10 +8,10 @@ import numpy as np
 class ImgFindFilter:
 
     @staticmethod
-    def find_pngs(pathlist : List[str]) -> np.ndarray:
+    def find_pngs(pathlist : List[str], label_content: str) -> np.ndarray:
         pathlist = ImgFindFilter.check_path_validity(pathlist)
 
-        images = [ImgFindFilter.worker(path) for path in pathlist]
+        images = [ImgFindFilter.worker(path, label_content) for path in pathlist]
 
         # flatten output arrays & sort afterwards
         images = np.concatenate(images, axis=0)
@@ -21,7 +21,7 @@ class ImgFindFilter:
 
 
     @staticmethod
-    def worker(path : str) -> np.ndarray:
+    def worker(path : str, label_content : str) -> np.ndarray:
         images = glob.glob(os.path.join(path, "*.png"))
         images.extend(glob.glob(os.path.join(path, "*.jpg")))
 
@@ -31,7 +31,7 @@ class ImgFindFilter:
         txts = glob.glob(os.path.join(path, "*.txt"))
         valid_filenames = set()
         for txt in txts:
-            r = ImgFindFilter.get_valid_labels_from_txt(txt)
+            r = ImgFindFilter.get_valid_labels_from_txt(txt, label_content)
             if len(r) > 0:
                 valid_filenames.update(r)
 
@@ -45,12 +45,12 @@ class ImgFindFilter:
 
 
     @staticmethod
-    def get_valid_labels_from_txt(txt):
+    def get_valid_labels_from_txt(txt, label_content : str):
         valid_filenames = set()
 
         with open(txt, "r") as f:
             for line in f:
-                if line.startswith("label::ball") and "not_in_image" not in line:
+                if line.startswith("label::" + label_content) and "not_in_image" not in line:
                     _, filename, *_ = line.split("|")
                     valid_filenames.add(filename)
 
