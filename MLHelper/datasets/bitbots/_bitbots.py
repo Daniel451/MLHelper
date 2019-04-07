@@ -43,8 +43,10 @@ class BallDatasetHandler:
                     "sequences-euro-ball-robot-1",
                     "sequences-jasper-euro-ball-1",
                     "sequences-jasper-kicking-euro-ball",
+                    "bitbots-nagoya-sequences-niklas",
                     "sequences-misc-ball-1",
-                    "sequences-misc-ball-robot-1"]
+                    "sequences-misc-ball-robot-1",
+                    "bitbots-nagoya-euro-ball-02"]
     _data_nagoya = ["2017_nagoya/" + e for e in _data_nagoya]
 
     _data_montreal = ["bitbots-fifa18-high-res-02",
@@ -57,6 +59,7 @@ class BallDatasetHandler:
                       "montreal-game07",
                       "montreal-game08",
                       "montreal-game09",
+                      "montreal-game10",
                       ]
     _data_montreal = ["2018_montreal/" + e for e in _data_montreal]
 
