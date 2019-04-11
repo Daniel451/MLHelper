@@ -1,157 +1,157 @@
 BallDatasetHandler:
-	TRAIN:
-		LEIPZIG:
-			bitbots-set00-01: 5
-			bitbots-set00-02: 6
-			bitbots-set00-03: 7
-			bitbots-set00-04: 12
-			bitbots-set00-05: 13
-			bitbots-set00-06: 14
-			bitbots-set00-07: 15
-			bitbots-set00-08: 16
-			bitbots-set00-09: 17
-			bitbots-set00-10: 18
-			bitbots-set00-11: 29
-			bitbots-set00-12: 30
-			bitbots-set00-13: 31
-			bitbots-set00-14: 32
-			bitbots-set00-15: 33
+  TRAIN:
+    LEIPZIG:
+      bitbots-set00-01: 5
+      bitbots-set00-02: 6
+      bitbots-set00-03: 7
+      bitbots-set00-04: 12
+      bitbots-set00-05: 13
+      bitbots-set00-06: 14
+      bitbots-set00-07: 15
+      bitbots-set00-08: 16
+      bitbots-set00-09: 17
+      bitbots-set00-10: 18
+      bitbots-set00-11: 29
+      bitbots-set00-12: 30
+      bitbots-set00-13: 31
+      bitbots-set00-14: 32
+      bitbots-set00-15: 33
 
-		NAGOYA:
-			bitbots-nagoya-euro-ball-game-01: 36 # WARNING: No dataset found for 'euro-ball-game-1'
-			sequences-euro-ball-robot-1: 153
-			sequences-jasper-euro-ball-1: 157
-			sequences-jasper-kicking-euro-ball: 156
-			sequences-misc-ball-1: 154
-			sequences-misc-ball-robot-1: 155
+    NAGOYA:
+      bitbots-nagoya-euro-ball-game-01: 36 # WARNING: No dataset found for 'euro-ball-game-1'
+      sequences-euro-ball-robot-1: 153
+      sequences-jasper-euro-ball-1: 157
+      sequences-jasper-kicking-euro-ball: 156
+      sequences-misc-ball-1: 154
+      sequences-misc-ball-robot-1: 155
 
-		IRAN:
-			bitbots-2018-iran-01: 160
-			bitbots-2018-iran-02: 161
-			bitbots-2018-iran-03: 162
-			bitbots-2018-iran-04: 163
-			bitbots-2018-iran-05: 164
-			bitbots-2018-iran-06: 165
-			bitbots-2018-iran-game-01-mrl-bitbots: 166
+    IRAN:
+      bitbots-2018-iran-01: 160
+      bitbots-2018-iran-02: 161
+      bitbots-2018-iran-03: 162
+      bitbots-2018-iran-04: 163
+      bitbots-2018-iran-05: 164
+      bitbots-2018-iran-06: 165
+      bitbots-2018-iran-game-01-mrl-bitbots: 166
 
-		MONTREAL:
-			bitbots-fifa18-high-res-02: 259
-			bitbots-montreal-game01: 260 # WARNING: No dataset found for 'montreal-game01'
-			bitbots-montreal-game02: 261 # WARNING: No dataset found for 'montreal-game02'
-			bitbots-montreal-game03: 474 # WARNING: No dataset found for 'montreal-game03'
-			bitbots-montreal-game04: 262 # WARNING: No dataset found for 'montreal-game04'
-			bitbots-montreal-game05: 475 # WARNING: No dataset found for 'montreal-game05'
-			bitbots-montreal-game06: 476 # WARNING: No dataset found for 'montreal-game06'
-			bitbots-montreal-game07: 477 # WARNING: No dataset found for 'montreal-game07'
-			bitbots-montreal-game08: 478 # WARNING: No dataset found for 'montreal-game08'
-			bitbots-montreal-game09: 479 # WARNING: No dataset found for 'montreal-game09'
-			bitbots-montreal-game10: 491 # WARNING: No dataset found for 'montreal-game10'
+    MONTREAL:
+      bitbots-fifa18-high-res-02: 259
+      bitbots-montreal-game01: 260 # WARNING: No dataset found for 'montreal-game01'
+      bitbots-montreal-game02: 261 # WARNING: No dataset found for 'montreal-game02'
+      bitbots-montreal-game03: 474 # WARNING: No dataset found for 'montreal-game03'
+      bitbots-montreal-game04: 262 # WARNING: No dataset found for 'montreal-game04'
+      bitbots-montreal-game05: 475 # WARNING: No dataset found for 'montreal-game05'
+      bitbots-montreal-game06: 476 # WARNING: No dataset found for 'montreal-game06'
+      bitbots-montreal-game07: 477 # WARNING: No dataset found for 'montreal-game07'
+      bitbots-montreal-game08: 478 # WARNING: No dataset found for 'montreal-game08'
+      bitbots-montreal-game09: 479 # WARNING: No dataset found for 'montreal-game09'
+      bitbots-montreal-game10: 491 # WARNING: No dataset found for 'montreal-game10'
 
-		BITBOTSLAB:
-			bitbots-fifa18-high-res-01: 196
-			bitbots-fifa18-davros-01: 197
+    BITBOTSLAB:
+      bitbots-fifa18-high-res-01: 196
+      bitbots-fifa18-davros-01: 197
 
-		CHALLENGE_2018:
-			bitbots-set00-01: 5
-			bitbots-set00-02: 6
-			bitbots-set00-03: 7
-			bitbots-set00-04: 12
-			bitbots-set00-05: 13
-			bitbots-set00-06: 14
-			bitbots-set00-07: 15
-			bitbots-set00-08: 16
-			bitbots-set00-09: 17
-			bitbots-set00-10: 18
-			bitbots-set00-11: 29
-			bitbots-set00-12: 30
-			bitbots-set00-13: 31
-			bitbots-set00-14: 32
-			bitbots-set00-15: 33
-			bitbots-nagoya-euro-ball-game-01: 36 # WARNING: No dataset found for 'euro-ball-game-1'
-			sequences-euro-ball-robot-1: 153
-			sequences-jasper-euro-ball-1: 157
-			sequences-jasper-kicking-euro-ball: 156
-			sequences-misc-ball-1: 154
-			sequences-misc-ball-robot-1: 155
-			bitbots-2018-iran-01: 160
-			bitbots-2018-iran-03: 162
-			bitbots-2018-iran-04: 163
-			bitbots-2018-iran-05: 164
-			bitbots-2018-iran-06: 165
-			bitbots-2018-iran-game-01-mrl-bitbots: 166
-			bitbots-fifa18-high-res-01: 196
-			bitbots-fifa18-davros-01: 197
+    CHALLENGE_2018:
+      bitbots-set00-01: 5
+      bitbots-set00-02: 6
+      bitbots-set00-03: 7
+      bitbots-set00-04: 12
+      bitbots-set00-05: 13
+      bitbots-set00-06: 14
+      bitbots-set00-07: 15
+      bitbots-set00-08: 16
+      bitbots-set00-09: 17
+      bitbots-set00-10: 18
+      bitbots-set00-11: 29
+      bitbots-set00-12: 30
+      bitbots-set00-13: 31
+      bitbots-set00-14: 32
+      bitbots-set00-15: 33
+      bitbots-nagoya-euro-ball-game-01: 36 # WARNING: No dataset found for 'euro-ball-game-1'
+      sequences-euro-ball-robot-1: 153
+      sequences-jasper-euro-ball-1: 157
+      sequences-jasper-kicking-euro-ball: 156
+      sequences-misc-ball-1: 154
+      sequences-misc-ball-robot-1: 155
+      bitbots-2018-iran-01: 160
+      bitbots-2018-iran-03: 162
+      bitbots-2018-iran-04: 163
+      bitbots-2018-iran-05: 164
+      bitbots-2018-iran-06: 165
+      bitbots-2018-iran-game-01-mrl-bitbots: 166
+      bitbots-fifa18-high-res-01: 196
+      bitbots-fifa18-davros-01: 197
 
-		ALL:
-			...
-
-
-	TEST:
-		NAGOYA:
-			test-nagoya-game-02: 81
-
-		WOLVES:
-			test-wolves-01: 159
-
-		IRAN:
-			bitbots-2018-iran-20-minibot: 191
-
-		BITBOTSLAB_CONCEALED:
-			euro-ball-robot-concealed: 182
-
-		CHALLENGE_2018:
-			test-nagoya-game-02: 81
-			test-wolves-01: 159
-
-		ALL:
-			...
+    ALL:
+      ...
 
 
-	TEST_NOISED:
-		NAGOYA:
-			noised-test-nagoya-game-02: 499 # WARNING: No dataset found for 'noised-test-nagoya-game-02'
+  TEST:
+    NAGOYA:
+      test-nagoya-game-02: 81
 
-		WOLVES:
-		    noised-test-wolves-01: 500 # WARNING: No dataset found for 'noised-test-wolves-01'
+    WOLVES:
+      test-wolves-01: 159
 
-		REAL:
-			test-blur-real-01: 501 # WARNING: No dataset found for 'test-blur-real-01'
+    IRAN:
+      bitbots-2018-iran-20-minibot: 191
 
-		CHALLENGE_2018:
-			noised-test-nagoya-game-02: 499 # WARNING: No dataset found for 'noised-test-nagoya-game-02'
-            noised-test-wolves-01: 500 # WARNING: No dataset found for 'noised-test-wolves-01'
+    BITBOTSLAB_CONCEALED:
+      euro-ball-robot-concealed: 182
 
-		ALL:
-			...
+    CHALLENGE_2018:
+      test-nagoya-game-02: 81
+      test-wolves-01: 159
+
+    ALL:
+      ...
+
+
+  TEST_NOISED:
+    NAGOYA:
+      noised-test-nagoya-game-02: 499 # WARNING: No dataset found for 'noised-test-nagoya-game-02'
+
+    WOLVES:
+      noised-test-wolves-01: 500 # WARNING: No dataset found for 'noised-test-wolves-01'
+
+    REAL:
+      test-blur-real-01: 501 # WARNING: No dataset found for 'test-blur-real-01'
+
+    CHALLENGE_2018:
+      noised-test-nagoya-game-02: 499 # WARNING: No dataset found for 'noised-test-nagoya-game-02'
+        noised-test-wolves-01: 500 # WARNING: No dataset found for 'noised-test-wolves-01'
+
+    ALL:
+      ...
 
 
 NegativeBallDatasetHandler:
-	DATA:
-		LEIPZIG:
-			leipzig-ball-negative-01: 502 # WARNING: No dataset found for 'cnn-training-negative-leipzig1'
+  DATA:
+    LEIPZIG:
+      leipzig-ball-negative-01: 502 # WARNING: No dataset found for 'cnn-training-negative-leipzig1'
 
-		NAGOYA:
-			negative-01: 202
+    NAGOYA:
+      negative-01: 202
 
-		BITBOTSLAB:
-			bitbots-lab-ball-negative-cam-01: 503 # WARNING: No dataset found for 'negative01'
+    BITBOTSLAB:
+      bitbots-lab-ball-negative-cam-01: 503 # WARNING: No dataset found for 'negative01'
 
-		ALL:
-			...
+    ALL:
+      ...
 
 RandomDatasetHandler:
-	DATA:
-		NAGOYA:
-			bitbots-nagoya-random-01: 504 # WARNING: No dataset found for 'random-unlabeled-01'
-			bitbots-nagoya-random-02: 505 # WARNING: No dataset found for 'random-unlabeled-02'
-			bitbots-nagoya-random-03: 506 # WARNING: No dataset found for 'random-unlabeled-03'
-			bitbots-nagoya-random-04: 507 # WARNING: No dataset found for 'random-unlabeled-04'
-			bitbots-nagoya-random-05: 508 # WARNING: No dataset found for 'random-unlabeled-05'
-			bitbots-nagoya-random-06: 509 # WARNING: No dataset found for 'random-unlabeled-06'
-			bitbots-nagoya-random-07: 510 # WARNING: No dataset found for 'random-unlabeled-07'
+  DATA:
+    NAGOYA:
+      bitbots-nagoya-random-01: 504 # WARNING: No dataset found for 'random-unlabeled-01'
+      bitbots-nagoya-random-02: 505 # WARNING: No dataset found for 'random-unlabeled-02'
+      bitbots-nagoya-random-03: 506 # WARNING: No dataset found for 'random-unlabeled-03'
+      bitbots-nagoya-random-04: 507 # WARNING: No dataset found for 'random-unlabeled-04'
+      bitbots-nagoya-random-05: 508 # WARNING: No dataset found for 'random-unlabeled-05'
+      bitbots-nagoya-random-06: 509 # WARNING: No dataset found for 'random-unlabeled-06'
+      bitbots-nagoya-random-07: 510 # WARNING: No dataset found for 'random-unlabeled-07'
 
-		BITBOTSLAB:
-            bitbots-lab-ball-random-01: 511 # WARNING: No dataset found for 'ball_random_01'
+    BITBOTSLAB:
+      bitbots-lab-ball-random-01: 511 # WARNING: No dataset found for 'ball_random_01'
 
-		ALL:
-			...
+    ALL:
+      ...
