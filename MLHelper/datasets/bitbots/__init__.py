@@ -1,6 +1,6 @@
 from ._bitbots import BallDatasetHandler
 from ._bitbots import NegativeBallDatasetHandler
-from ._bitbots import RandomUnlabeledDatasetHandler
+from ._bitbots import RandomDatasetHandler
 
 import os
 
