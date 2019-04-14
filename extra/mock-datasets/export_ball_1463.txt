@@ -1,0 +1,17 @@
+Export of Imageset bitbots-set00-01 (ball annotations in bounding boxes)
+[team|Bit-Bots]
+[set|bitbots-set00-01]
+[format: "label::annotation_type|filename|img_width|img_height|x1|y1|x2|y2|center_x|center_y|width|height"]
+
+label::ball|img_fr_nov15_000.005.png|800|600|528|208|744|420|636.0|314.0|216|212
+label::ball|img_fr_nov15_000.002.png|800|600|146|157|263|274|204.5|215.5|117|117
+label::ball|img_fr_nov15_000.003.png|800|600|353|161|508|324|430.5|242.5|155|163
+label::ball|img_fr_nov15_000.007.png|800|600|348|121|487|263|417.5|192.0|139|142
+label::ball|img_fr_nov15_000.006.png|800|600|32|56|235|248|133.5|152.0|203|192
+label::ball|img_fr_nov15_000.008.png|800|600|329|144|447|263|388.0|203.5|118|119
+label::ball|img_fr_nov15_000.001.png|800|600|498|152|609|262|553.5|207.0|111|110
+label::ball|img_fr_nov15_000.000.png|800|600|338|163|443|277|390.5|220.0|105|114
+label::ball|img_fr_nov15_000.009.png|800|600|275|105|384|220|329.5|162.5|109|115
+label::ball|img_fr_nov15_000.004.png|800|600|292|166|508|380|400.0|273.0|216|214
+label::ball|fake.png|640|480|552|191|587|228|569.5|209.5|35|37
+label::ball|fake.png|640|480|313|336|382|407|347.5|371.5|69|71
