@@ -1,0 +1,18 @@
+Export of Imageset bitbots-set00-01 (ball annotations in bounding boxes)
+[team|Bit-Bots]
+[set|bitbots-set00-01]
+[format: "label::annotation_type|filename|img_width|img_height|x1|y1|x2|y2|center_x|center_y|width|height"]
+
+label::goalpost|img_fr_nov15_000.005.png|800|600|723|0|800|225|805.5|112.5|77|225
+label::goalpost|img_fr_nov15_000.002.png|800|600|510|1|572|196|541.0|291.5|62|195
+label::goalpost|img_fr_nov15_000.003.png|800|600|781|180|800|200|790.5|190.0|19|20
+label::goalpost|img_fr_nov15_000.003.png|800|600|782|105|798|200|806.0|247.5|16|95
+label::goalpost|img_fr_nov15_000.007.png|800|600|745|0|798|185|823.5|92.5|53|185
+label::goalpost|img_fr_nov15_000.006.png|800|600|650|2|745|193|727.5|97.5|95|191
+label::goalpost|img_fr_nov15_000.008.png|800|600|703|2|788|191|745.5|276.5|85|189
+label::goalpost|img_fr_nov15_000.001.png|800|600|1|1|59|195|88.0|292.0|58|194
+label::goalpost|img_fr_nov15_000.000.png|800|600|688|0|772|203|760.0|103.5|84|203
+label::goalpost|img_fr_nov15_000.009.png|800|600|646|2|731|168|731.5|251.0|85|166
+label::goalpost|img_fr_nov15_000.004.png|800|600|773|149|800|237|808.5|193.0|27|88
+label::goalpost|fake.png|640|480|398|0|458|225|438.0|337.5|60|225
+label::goalpost|fake.png|640|480|197|14|252|236|236.5|347.0|55|222

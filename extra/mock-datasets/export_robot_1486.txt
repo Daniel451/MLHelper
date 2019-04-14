@@ -1,0 +1,7 @@
+Export of Imageset bitbots-set00-01 (ball annotations in bounding boxes)
+[team|Bit-Bots]
+[set|bitbots-set00-01]
+[format: "label::annotation_type|filename|img_width|img_height|x1|y1|x2|y2|center_x|center_y|width|height"]
+
+robot|img_fr_nov15_000.000.png|not_in_image
+label::robot|fake.png|640|480|104|265|205|412|154.5|338.5|101|147
