@@ -13,6 +13,7 @@ from ._image_label_reader.LabelObjects import LabelBoundingBox2D
 from . import heatmap
 from . import noise
 from . import dir
+from . import img
 
 
 # check for OpenCV 3
