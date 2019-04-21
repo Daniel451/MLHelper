@@ -5,20 +5,21 @@ import numpy as np
 import cv2
 import multiprocessing as mp
 import time
+import math
 
 from .PathImageFinder import ImgFind
 from .PathImageFinderFilterLabels import ImgFindFilter
 
 
 class Reader:
-    def __init__(self, pathlist : List[str],
+    def __init__(self, pathlist: List[str],
                  label_content: str = None,
-                 batch_size : int = 1,
-                 queue_size : int = 16,
-                 processes : int = None,
-                 img_dim : tuple = (200, 150),
-                 wait_for_queue_full = True,
-                 filter_labels = False):
+                 batch_size: int = 1,
+                 queue_size: int = 16,
+                 processes: int = None,
+                 img_dim: tuple = (200, 150),
+                 wait_for_queue_full=True,
+                 filter_labels=False):
         """
         :param pathlist: a list containing valid paths that hold images
         :param batch_size: size of the image data batches that will be loaded
@@ -34,27 +35,7 @@ class Reader:
         self._img_dim = img_dim
         self._queue_size = queue_size
         self._filter_labels = filter_labels
-
-        # data queue
-        self._q = mp.Queue(self._queue_size)
-        self._index_q = mp.Queue(20)
-
-        # set label
-        self._label_content = label_content
-
-        # load image paths
-        self._loading()
-
-        # setup iterator
-        self._random_img_paths = self._img_paths.copy()
-        np.random.shuffle(self._random_img_paths)
-        random_index_steps = range(0, self.get_dataset_size(), self._batch_size)
-        self._file_cycling_index = cycle(random_index_steps)
-
-        # index queue worker
-        worker = mp.Process(target=self._index_worker)
-        worker.daemon = True
-        worker.start()
+        self._dataset_size = 0
 
         # determine appropriate number of processes
         if processes is None:
@@ -64,12 +45,32 @@ class Reader:
                 num_workers = 4
         else:
             num_workers = processes
+        print(f"MLHelper ImageReader working with {num_workers} processes for image loading")
+
+        # load image paths
+        self._loading()
+
+        # data queue
+        self._q = mp.Queue(self._queue_size)  # image queue size, i.e. max. number of batches to store in image queue
+        self._imgpath_q = mp.Queue(int(num_workers*32))  # statically setting queue size much bigger than num_workers
+
+        # set label
+        self._label_content = label_content
+
+        # index queue worker
+        path_worker = mp.Process(target=self._path_chunk_worker,
+                                 args=(self._imgpath_q, self._img_paths,))
+        path_worker.daemon = True
+        path_worker.start()
 
         # start multiprocessing worker for filling queue
+        img_worker = list()
         for i in range(num_workers):
-            worker = mp.Process(target=self._worker)
+            worker = mp.Process(target=self._worker,
+                                args=(self._imgpath_q, self._q))
             worker.daemon = True
             worker.start()
+            img_worker.append(worker)
 
         # potentially wait in the main thread for the queue to be full once before continuing
         if wait_for_queue_full:
@@ -82,10 +83,25 @@ class Reader:
         print()
 
 
-    def _index_worker(self):
+    def _path_chunk_worker(self, path_q: mp.Queue, imgpaths: np.ndarray):
+        # helper
+        def get_random_paths():
+            imgpaths_random = imgpaths.copy()
+            np.random.shuffle(imgpaths_random)
+            imgpaths_random = np.concatenate((imgpaths_random, imgpaths_random[0:self._batch_size]), axis=0)
+
+            return imgpaths_random
+
+        # loop
         while True:
-            next_index = next(self._file_cycling_index)
-            self._index_q.put(next_index)
+            # get new random paths
+            paths = get_random_paths()
+            indexes = range(0, self._dataset_size, self._batch_size)
+
+            # batches for one whole epoch
+            for idx in indexes:
+                # add final batch of paths to the queue
+                path_q.put(paths[idx : idx + self._batch_size], block=True)
 
 
     def get_max_queue_size(self):
@@ -101,30 +117,42 @@ class Reader:
         return self._q.get()
 
 
-    def _worker(self):
+    def _worker(self, path_q: mp.Queue, img_q):
         while True:
-            # get next index delimiter
-            next_index = self._index_q.get(block=True)
-
             # extract paths for the next image batch
-            img_paths = self._random_img_paths[next_index: next_index + self._batch_size]
+            img_paths = path_q.get(block=True)
 
             buffer = list()
             for path in img_paths:
+                # read in image
                 img_data = cv2.imread(path)
+
+                # check if reading succeeded
                 assert img_data is not None, \
                     f"img_data is None, OpenCV could not read '{path}'"
+
+                # if img_dim is set, resize image
                 if self._img_dim is not None:
                     img_data = cv2.resize(img_data, self._img_dim)
+
+                # RGB color correction
                 img_data = cv2.cvtColor(img_data, cv2.COLOR_BGR2RGB)
+
+                # change dtype to float32
                 img_data = img_data.astype(np.float32) / 255.0
+
+                # check image ndim
                 assert (img_data.ndim == 2 or img_data.ndim == 3), \
                     f"img_data.ndim was '{img_data.ndim}', which is unsupported for images"
+
+                # append image data to buffer
                 buffer.append(img_data)
+
+            # convert list to proper numpy array
             img_batch = np.array(buffer).astype(np.float32)
 
             # fill queue
-            self._q.put((img_batch, img_paths), block=True)
+            img_q.put((img_batch, img_paths), block=True)
 
 
     def _loading(self):
