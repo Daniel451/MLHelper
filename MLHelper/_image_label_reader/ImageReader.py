@@ -36,6 +36,7 @@ class Reader:
         self._queue_size = queue_size
         self._filter_labels = filter_labels
         self._dataset_size = 0
+        self._label_content = label_content
 
         # determine appropriate number of processes
         if processes is None:
@@ -53,9 +54,6 @@ class Reader:
         # data queue
         self._q = mp.Queue(self._queue_size)  # image queue size, i.e. max. number of batches to store in image queue
         self._imgpath_q = mp.Queue(int(num_workers*32))  # statically setting queue size much bigger than num_workers
-
-        # set label
-        self._label_content = label_content
 
         # index queue worker
         path_worker = mp.Process(target=self._path_chunk_worker,
