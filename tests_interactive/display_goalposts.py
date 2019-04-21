@@ -7,7 +7,7 @@ from matplotlib import patches
 
 
 for img_dim in [(800, 600), (200, 150)]:
-    dat = H.ImgLblReader([os.path.join(os.environ["ROBO_AI_DATA"], "bitbots-set00-01")],
+    dat = H.ImgLblReader([os.path.join(os.environ["ROBO_AI_DATA"], "5")],
                          batch_size=4,
                          queue_size=4,
                          img_dim=img_dim,

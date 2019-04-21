@@ -1,6 +1,8 @@
 import unittest
 import os
+import numpy as np
 import MLHelper as H
+from itertools import product
 from MLHelper.datasets.bitbots import BallDatasetHandler
 from pathlib import Path
 
@@ -10,11 +12,12 @@ class TestImageReader(unittest.TestCase):
     test_dir = Path(os.path.realpath(__file__)).parent.absolute()
     mock_dataset_dir = test_dir.parent / "extra" / "mock-datasets"
     pathlist = [str(mock_dataset_dir)]
+    batch_size = 5
 
     @classmethod
     def setUpClass(cls):
         TestImageReader.data = H.ImgReader(TestImageReader.pathlist,
-                                           batch_size=5,
+                                           batch_size=TestImageReader.batch_size,
                                            label_content="ball")
 
     def test_instantiation(self):
@@ -31,13 +34,26 @@ class TestImageReader(unittest.TestCase):
         self.assertEqual(dat.get_dataset_size(), 11)
 
     def test_batch_size(self):
-        batch, paths = TestImageReader.data.get_next_img_batch()
-        self.assertEqual(batch.shape[0], 5)
-        batch, paths = TestImageReader.data.get_next_img_batch()
-        self.assertEqual(batch.shape[0], 5)
-        batch, paths = TestImageReader.data.get_next_img_batch()
-        # FIXME: This fails sometimes. Race condition?
-        self.assertEqual(batch.shape[0], 1)
+        """
+        run get_next_batch several times
+        -> it should always return *extactly* batch_size samples
+        """
+        for i in range(20):
+            batch, paths = TestImageReader.data.get_next_img_batch()
+            self.assertEqual(batch.shape[0], TestImageReader.batch_size, msg=f"iteration {i}")
+
+    def test_random_order(self):
+        path_buffer = list()
+        for i in range(10):
+            _, paths = TestImageReader.data.get_next_img_batch()
+            path_buffer.append(paths)
+
+        for a, b in product(path_buffer, path_buffer):
+            if id(a) == id(b):
+                continue
+
+            self.assertTrue(np.any(a != b), msg="this tests the random ordering of paths for each"
+                                                +" batch. This might fail with a very low probability.")
 
     @unittest.skip("To be moved to interactive tests")
     def test_leipzig_ball_label(self):
