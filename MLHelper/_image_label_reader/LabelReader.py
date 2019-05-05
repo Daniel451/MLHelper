@@ -14,7 +14,7 @@ class Reader:
                  label_content: str,
                  img_dim: tuple = None):
         """
-        :param pathlist: a list containing valid paths that hold images
+        :param collection_or_paths: an ImagesetCollection instance or a list containing valid paths that hold images
         :param img_dim: resize images to given dimensions - None by default
         """
         # init variables

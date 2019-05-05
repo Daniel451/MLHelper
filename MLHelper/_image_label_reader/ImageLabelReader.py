@@ -18,7 +18,7 @@ class DataObject:
         """
         constructor
 
-        :param pathlist: a list containing valid paths containing images and labels
+        :param collection_or_paths: an ImagesetCollection instance or a list containing valid paths containing images and labels
 
         :param batch_size: size of the image data batches that will be loaded
         """
