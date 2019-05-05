@@ -1,18 +1,41 @@
 import os
 from collections import namedtuple
 from itertools import chain
+from typing import Iterable, FrozenSet, Union, List
 
 
-def prepend_data_path(paths):
+def prepend_data_path(paths: Iterable[str]) -> Iterable[str]:
     return (os.path.join(os.environ["ROBO_AI_DATA"], path) for path in paths)
 
 
-def collection_to_id(collection_name):
+def collection_to_id(collection_name: str) -> int:
     return _collection_to_id[collection_name]
 
 
-def collections_to_paths(collection_names):
-    return frozenset(prepend_data_path(str(collection_to_id(collection_name)) for collection_name in collection_names))
+def collection_ids_to_paths(collection_ids: Iterable[int]) -> Iterable[str]:
+    return (prepend_data_path(str(id) for id in collection_ids))
+
+
+def collection_names_to_paths(collection_names: Iterable[str]) -> Iterable[str]:
+    return collection_ids_to_paths((collection_to_id(name) for name in collection_names))
+
+
+def collection_ids_to_names(collection_ids: Iterable[int]) -> Iterable[str]:
+    return (_id_to_collection[id] for id in collection_ids)
+
+
+class ImagesetCollection:
+    def __init__(self, ids_or_names: Iterable[Union[int, str]]):
+        self._ids = [id_or_name if isinstance(id_or_name, int) else collection_to_id(id_or_name) for id_or_name in ids_or_names]
+
+    def to_paths(self) -> List[str]:
+        return list(collection_ids_to_paths(self._ids))
+
+    def to_ids(self) -> List[int]:
+        return list(self._ids)
+
+    def to_names(self) -> List[str]:
+        return list(collection_ids_to_names(self._ids))
 
 
 _collection_to_id = {
@@ -78,6 +101,8 @@ _collection_to_id = {
     "bitbots-nagoya-random-07": 510,
     "bitbots-lab-ball-random-01": 511,
 }
+
+_id_to_collection = {id: name for name, id in _collection_to_id.items()}
 
 
 #############
@@ -204,13 +229,13 @@ class BallDatasetHandler:
                                         "ALL"])
 
     TRAIN = _train_tuple(
-        LEIPZIG=collections_to_paths(_train_data_leipzig),
-        NAGOYA=collections_to_paths(_train_data_nagoya),
-        IRAN=collections_to_paths(_train_data_iran),
-        MONTREAL=collections_to_paths(_train_data_montreal),
-        BITBOTSLAB=collections_to_paths(_train_data_bitbotslab),
-        CHALLENGE_2018=collections_to_paths(_challenge2018),
-        ALL=collections_to_paths(frozenset.union(_train_data_leipzig, _train_data_nagoya, _train_data_iran,
+        LEIPZIG=ImagesetCollection(_train_data_leipzig),
+        NAGOYA=ImagesetCollection(_train_data_nagoya),
+        IRAN=ImagesetCollection(_train_data_iran),
+        MONTREAL=ImagesetCollection(_train_data_montreal),
+        BITBOTSLAB=ImagesetCollection(_train_data_bitbotslab),
+        CHALLENGE_2018=ImagesetCollection(_challenge2018),
+        ALL=ImagesetCollection(frozenset.union(_train_data_leipzig, _train_data_nagoya, _train_data_iran,
                                         _train_data_bitbotslab, _train_data_montreal))
     )
 
@@ -219,12 +244,12 @@ class BallDatasetHandler:
                                       "ALL"])
 
     TEST = _test_tuple(
-        NAGOYA=collections_to_paths(_test_nagoya_game_02),
-        WOLVES=collections_to_paths(_test_wolves_01),
-        IRAN=collections_to_paths(_test_2018_iran_minibot_20),
-        BITBOTSLAB_CONCEALED=collections_to_paths(_test_bitbotslab_robot_concealed),
-        CHALLENGE_2018=collections_to_paths(frozenset.union(_test_nagoya_game_02, _test_wolves_01)),
-        ALL=collections_to_paths(frozenset.union(_test_nagoya_game_02, _test_wolves_01, _test_2018_iran_minibot_20,
+        NAGOYA=ImagesetCollection(_test_nagoya_game_02),
+        WOLVES=ImagesetCollection(_test_wolves_01),
+        IRAN=ImagesetCollection(_test_2018_iran_minibot_20),
+        BITBOTSLAB_CONCEALED=ImagesetCollection(_test_bitbotslab_robot_concealed),
+        CHALLENGE_2018=ImagesetCollection(frozenset.union(_test_nagoya_game_02, _test_wolves_01)),
+        ALL=ImagesetCollection(frozenset.union(_test_nagoya_game_02, _test_wolves_01, _test_2018_iran_minibot_20,
                                            _test_bitbotslab_robot_concealed))
     )
 
@@ -233,28 +258,28 @@ class BallDatasetHandler:
                                                     "ALL"])
 
     TEST_NOISED = _test_noised_tuple(
-        NAGOYA=collections_to_paths(_noised_test_nagoya_game_02),
-        WOLVES=collections_to_paths(_noised_test_wolves_01),
-        REAL=collections_to_paths(_noised_test_real_01),
-        CHALLENGE_2018=collections_to_paths(frozenset.union(_noised_test_nagoya_game_02, _noised_test_wolves_01)),
-        ALL=collections_to_paths(frozenset.union(_noised_test_nagoya_game_02, _noised_test_wolves_01, _noised_test_real_01))
+        NAGOYA=ImagesetCollection(_noised_test_nagoya_game_02),
+        WOLVES=ImagesetCollection(_noised_test_wolves_01),
+        REAL=ImagesetCollection(_noised_test_real_01),
+        CHALLENGE_2018=ImagesetCollection(frozenset.union(_noised_test_nagoya_game_02, _noised_test_wolves_01)),
+        ALL=ImagesetCollection(frozenset.union(_noised_test_nagoya_game_02, _noised_test_wolves_01, _noised_test_real_01))
     )
 
 
 class NegativeBallDatasetHandler:
     _data_tuple = namedtuple("DATATUPLE", ["LEIPZIG", "NAGOYA", "BITBOTSLAB", "ALL"])
 
-    DATA = _data_tuple(LEIPZIG=collections_to_paths(_negative_data_leipzig),
-                       NAGOYA=collections_to_paths(_negative_data_nagoya),
-                       BITBOTSLAB=collections_to_paths(_negative_data_bitbotslab),
-                       ALL=collections_to_paths(frozenset.union(_negative_data_leipzig, _negative_data_nagoya, _negative_data_bitbotslab))
+    DATA = _data_tuple(LEIPZIG=ImagesetCollection(_negative_data_leipzig),
+                       NAGOYA=ImagesetCollection(_negative_data_nagoya),
+                       BITBOTSLAB=ImagesetCollection(_negative_data_bitbotslab),
+                       ALL=ImagesetCollection(frozenset.union(_negative_data_leipzig, _negative_data_nagoya, _negative_data_bitbotslab))
     )
 
 
 class RandomDatasetHandler:
     _data_tuple = namedtuple("DATATUPLE", ["NAGOYA", "BITBOTSLAB", "ALL"])
 
-    DATA = _data_tuple(NAGOYA=collections_to_paths(_random_data_nagoya),
-                       BITBOTSLAB=collections_to_paths(_random_data_bitbotslab),
-                       ALL=collections_to_paths(frozenset.union(_random_data_nagoya, _random_data_bitbotslab))
+    DATA = _data_tuple(NAGOYA=ImagesetCollection(_random_data_nagoya),
+                       BITBOTSLAB=ImagesetCollection(_random_data_bitbotslab),
+                       ALL=ImagesetCollection(frozenset.union(_random_data_nagoya, _random_data_bitbotslab))
     )

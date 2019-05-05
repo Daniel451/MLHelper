@@ -22,23 +22,26 @@ class TestDatasetHandler(unittest.TestCase):
 
     def _test_paths_prepended(self, dataset_tuple, tuple_name):
         mock_path = TestDatasetHandler.mock_path
-        for collection, paths in dataset_tuple._asdict().items():
-            for i, path in enumerate(paths):
+        for collection_name, collection in dataset_tuple._asdict().items():
+            for i, path in enumerate(collection.to_paths()):
                 expected_prefix = mock_path + os.path.sep
                 self.assertTrue(path.startswith(expected_prefix),
-                                f'Expected path at {tuple_name}.{collection}[{i}] to start with "{expected_prefix}", actual: {repr(path)}')
+                                f'Expected path at {tuple_name}.{collection_name}[{i}] to start with "{expected_prefix}", actual: {repr(path)}')
 
     def _test_has_dataset_paths(self, expected_keys, dataset_tuple, tuple_name):
         for key in expected_keys:
             self.assertIn(key, dataset_tuple._fields)
-            paths = getattr(dataset_tuple, key)
-            self.assertIsInstance(paths, frozenset)
+            collection = getattr(dataset_tuple, key)
+            self.assertIsInstance(collection, datasets.ImagesetCollection)
+            paths = collection.to_paths()
+            self.assertIsInstance(paths, list)
             self.assertGreater(len(paths), 0, f"dataset {tuple_name}.{key} should have non-zero path items")
 
     def _test_dataset_all_has_all_paths(self, dataset_tuple):
         all_collections = (getattr(dataset_tuple, key) for key in dataset_tuple._fields)
-        all_paths = set(path for path in chain(*all_collections))
-        self.assertSetEqual(set(getattr(dataset_tuple, "ALL")), all_paths)
+        all_collection_paths = (collection.to_paths() for collection in all_collections)
+        all_paths = set(path for path in chain(*all_collection_paths))
+        self.assertSetEqual(set(getattr(dataset_tuple, "ALL").to_paths()), all_paths)
 
 
 class TestBallDatasetHandler(TestDatasetHandler):

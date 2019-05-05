@@ -1,13 +1,14 @@
-from typing import List
+from typing import List, Union
 
 from .ImageReader import Reader as ImgReader
 from .LabelReader import Reader as LblReader
 from .ImageBatch import ImageBatch
+from ..datasets.bitbots import ImagesetCollection
 
 
 class DataObject:
 
-    def __init__(self, pathlist : List[str],
+    def __init__(self, collection_or_paths : Union[ImagesetCollection, List[str]],
                  label_content : str = None,
                  batch_size : int = 1,
                  queue_size : int = 64,
@@ -22,7 +23,10 @@ class DataObject:
         :param batch_size: size of the image data batches that will be loaded
         """
         # init variables
-        self._pathlist = pathlist
+        if isinstance(collection_or_paths, ImagesetCollection):
+            self._pathlist = collection_or_paths.to_paths()
+        else:
+            self._pathlist = collection_or_paths
         self._batch_size = batch_size
         self._labels = LblReader(self._pathlist, label_content=label_content, img_dim=img_dim)
         self._images = ImgReader(self._pathlist, label_content=label_content, batch_size=self._batch_size,
