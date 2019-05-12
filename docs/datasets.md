@@ -39,6 +39,17 @@ bitbots.TEST.CHALLENGE_2018
 bitbots.TEST.ALL
 ```
 
+
+Available ``TEST_NOISED`` datasets (i.e. noised versions of test images):
+
+```python
+bitbots.TEST.NAGOYA
+bitbots.TEST.WOLVES
+bitbots.TEST.REAL
+bitbots.TEST.CHALLENGE_2018
+bitbots.TEST.ALL
+```
+
 For an explanation of `CHALLENGE_2018` see [Towards Real-Time Ball Localization using CNNs](https://robocup.informatik.uni-hamburg.de/wp-content/uploads/2018/06/2018_Speck_Ball_Localization.pdf) by Speck et al.
 
 ### Bit-Bots --- Example
