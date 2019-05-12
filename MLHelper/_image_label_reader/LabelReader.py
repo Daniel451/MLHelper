@@ -3,19 +3,25 @@ import os
 import glob
 import math
 import time
-from typing import List, Dict
+from typing import List, Dict, Union
 from collections import defaultdict
 from .LabelObjects import LabelBoundingBox2D
+from ..datasets.bitbots import ImagesetCollection
 
 
 class Reader:
-    def __init__(self, pathlist: List[str], label_content: str, img_dim: tuple = None):
+    def __init__(self, collection_or_paths: Union[ImagesetCollection, List[str]],
+                 label_content: str,
+                 img_dim: tuple = None):
         """
-        :param pathlist: a list containing valid paths that hold images
+        :param collection_or_paths: an ImagesetCollection instance or a list containing valid paths that hold images
         :param img_dim: resize images to given dimensions - None by default
         """
         # init variables
-        self._pathlist = pathlist
+        if isinstance(collection_or_paths, ImagesetCollection):
+            self._pathlist = collection_or_paths.to_paths()
+        else:
+            self._pathlist = collection_or_paths
         self._label_content = label_content
         self._img_dim = img_dim
         self._labels = defaultdict(list)

@@ -1,6 +1,7 @@
 from ._bitbots import BallDatasetHandler
 from ._bitbots import NegativeBallDatasetHandler
 from ._bitbots import RandomDatasetHandler
+from ._bitbots import ImagesetCollection
 
 import os
 

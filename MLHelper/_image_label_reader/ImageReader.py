@@ -1,5 +1,5 @@
 import os, sys
-from typing import List, Dict
+from typing import List, Dict, Union
 from itertools import cycle
 import numpy as np
 import cv2
@@ -9,10 +9,11 @@ import math
 
 from .PathImageFinder import ImgFind
 from .PathImageFinderFilterLabels import ImgFindFilter
+from ..datasets.bitbots import ImagesetCollection
 
 
 class Reader:
-    def __init__(self, pathlist: List[str],
+    def __init__(self, collection_or_paths: Union[ImagesetCollection, List[str]],
                  label_content: str = None,
                  batch_size: int = 1,
                  queue_size: int = 16,
@@ -21,14 +22,17 @@ class Reader:
                  wait_for_queue_full=True,
                  filter_labels=False):
         """
-        :param pathlist: a list containing valid paths that hold images
+        :param collection_or_paths: an ImagesetCollection instance or a list containing valid paths that hold images
         :param batch_size: size of the image data batches that will be loaded
         :param img_dim: resize images to given dimensions - None by default
         :param wait_for_queue_full: toggles if main thread should wait for the queue to be full before continuing
         :param processes: number of processes to start as workers for loading images
         """
         # init variables
-        self._pathlist = pathlist
+        if isinstance(collection_or_paths, ImagesetCollection):
+            self._pathlist = collection_or_paths.to_paths()
+        else:
+            self._pathlist = collection_or_paths
         self._batch_size = batch_size
         self._img_paths = np.zeros(1)
         self._file_cycler = None
