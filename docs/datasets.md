@@ -1,5 +1,9 @@
 # Datasets
 
+### Download Datasets
+
+An [ImageTagger](https://imagetagger.bit-bots.de) API was introduced in [v0.3.5](https://github.com/Daniel451/MLHelper/releases/tag/v0.3.5). See [How to Download ImageTagger Datasets](imagetagger.md) for more information.
+
 ### Structure
 
 Each top-level dataset is a named submodule, e.g. `MLHelper.datasets.bitbots`. These Submodules have datasets, in the case of `bitbots` they are split into `TRAIN` and `TEST`.
