@@ -22,3 +22,9 @@ Feel free to have a look at open issues and submit pull requests or suggest your
 ## License
 
 No license at the moment.
+
+
+## Maintainer & Credits
+
+* Daniel Speck ([daniel451](https://github.com/Daniel451)) (maintainer)
+* [cpupower](https://github.com/cpupower) (contributor)
