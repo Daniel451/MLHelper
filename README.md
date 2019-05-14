@@ -9,9 +9,13 @@ Visit: [daniel451.github.io/MLHelper](https://daniel451.github.io/MLHelper/)
  * Python 3.6 or later
 
 
-## Installation
+## Installation & PyPI
 
 `pip install MLHelper`
+
+#### PyPI
+
+You can check the PyPI page at [pypi.org/project/MLHelper](https://pypi.org/project/MLHelper/). Download statistics are available at [pypistats.org/packages/mlhelper](https://pypistats.org/packages/mlhelper).
 
 
 ## How to Contribute
